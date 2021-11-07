@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7997798e7f4f29042baa3397c9c5e9cd, type: 3}
+  m_Name: Default Ship Config
+  m_EditorClassIdentifier: 
+  throttleSpeed: 100
+  strafeSpeed: 100
+  angularSpeed: 100
+  pitchSensitivity: 2.5
+  yawSensitivity: 2.5
+  rollSensitivity: 0
+  bankLimit: 5

@@ -1,0 +1,96 @@
+{
+    "name": "Ship Input Actions",
+    "maps": [
+        {
+            "name": "Ship",
+            "id": "7a1054df-bfd2-47a3-81ab-e79788d203d2",
+            "actions": [
+                {
+                    "name": "Strafe Axis",
+                    "type": "Value",
+                    "id": "0d1ab0aa-a24d-4be6-b6cf-4595d4aa808a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "Rotation Axis",
+                    "type": "Value",
+                    "id": "5e2553ce-3c41-4f3f-949e-f3fcdf304bf6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press"
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1D Axis",
+                    "id": "41f8ab15-21c8-466b-82bb-167a2a8a1ab1",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Strafe Axis",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "d8b1dd18-e6cd-4e1a-80e6-4449470c2714",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Strafe Axis",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "2033deec-8e9e-44f7-929a-eaafa19391a2",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Strafe Axis",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "28548f74-c1a7-4c18-9cb8-c42615cfc5a5",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation Axis",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "9ec51ed0-5160-4f0d-a0d0-2da558f57f2a",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation Axis",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "ff79ac10-fbac-4c47-b722-4f96809dff9b",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation Axis",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

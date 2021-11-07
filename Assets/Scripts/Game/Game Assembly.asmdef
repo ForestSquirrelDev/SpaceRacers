@@ -1,0 +1,17 @@
+{
+    "name": "GameAssembly",
+    "rootNamespace": "Game",
+    "references": [
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:1c12042ba0475174a91c02419534ebcb"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

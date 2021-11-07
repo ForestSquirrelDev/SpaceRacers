@@ -1,0 +1,12 @@
+If you are using Unity version 2020.2 or higher click on HDRP_2020.2+
+
+And if you are using Unity version 2019.4 or 2020.1 click on HDRP_2019.4+
+
+You may need to change the "Emission Intensity" value of the materials depending on the lighting and exposure of your scene. If you drop any prefab in your scene and you notice that the cockpits or thusters are too dimmed out; simply select the material, and under the "Emission Inputs" tab, change the "Emissive Color" to white and change the "Emission Intensity" value, values may greatly differ from 1 to 10000.
+
+And if for any reason, due to any future Unity or HDRP updates; clicking on the upgrade unity packages I provided doesn't work, simple disregard it, import a fresh project and go to: 
+Window -> Render Pipeline -> HD Render Pipeline Wizard -> Fix All
+And
+Window -> Render Pipeline -> HD Render Pipeline Wizard -> Upgrade Project Materials to High Definition Materials 
+
+(Afterwards you will still need to change the Emission Intensity mentioned above)
