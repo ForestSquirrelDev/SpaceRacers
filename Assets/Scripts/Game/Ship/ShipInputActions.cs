@@ -96,7 +96,7 @@ namespace SpaceRacers.Game.Ship
                 {
                     ""name"": ""negative"",
                     ""id"": ""9ec51ed0-5160-4f0d-a0d0-2da558f57f2a"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -107,7 +107,7 @@ namespace SpaceRacers.Game.Ship
                 {
                     ""name"": ""positive"",
                     ""id"": ""ff79ac10-fbac-4c47-b722-4f96809dff9b"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

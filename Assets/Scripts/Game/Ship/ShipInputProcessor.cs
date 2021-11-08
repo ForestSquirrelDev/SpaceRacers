@@ -47,11 +47,9 @@ namespace Game.Ship {
         public void Update(float deltaTime) {
             UpdateKeyboardThrottle(deltaTime);
             UpdateInputAxes(deltaTime);
-            Vector2 mouseInput = mouse.position.ReadValue();
-            Vector3 mousePos = new Vector3(mouseInput.x, mouseInput.y, 1000f);
-            Vector3 gotoPos = Camera.main.ScreenToWorldPoint(mousePos);
-            CalculateTurn(gotoPos);
-            CalculateRoll(mousePos, Camera.main.transform.up);
+            FindMousePosition(out Vector3 screenPos, out Vector3 worldPos);
+            CalculateTurn(worldPos);
+            CalculateRoll(screenPos, Camera.main.transform.up);
             //Debug.Log($"Throttle: {Throttle}, strafe: {Strafe}, rotation: {Rotation}, mousePosition: {mouseWorldPosition}" +
             //    $" Roll: {Roll}, Pitch: {Pitch}, Yaw: {Yaw}");
         }
@@ -80,36 +78,41 @@ namespace Game.Ship {
             }
         }
 
+        private void FindMousePosition(out Vector3 mousePos, out Vector3 gotoPos) {
+            Vector2 mouseInput = mouse.position.ReadValue();
+            mousePos = new Vector3(mouseInput.x, mouseInput.y, 1000f);
+            gotoPos = Camera.main.ScreenToWorldPoint(mousePos);
+        }
+
         private void CalculateTurn(Vector3 gotoPos) {
-            int version = 1;
-            if (version == 0) {
+            if (config.turnType == ShipConfig.TurnType.FollowWorldSpaceMouse) {
                 Vector3 localGotoPos = transform.InverseTransformVector(gotoPos - transform.position).normalized;
 
-                Pitch = Mathf.Clamp(-localGotoPos.y * config.pitchSensitivity, -1f, 1f);
-                Yaw = Mathf.Clamp(localGotoPos.x * config.yawSensitivity, -1f, 1f);
+                Pitch = Mathf.Clamp(-localGotoPos.y * config.pitchSensitivity, -config.pitchSensitivity, config.pitchSensitivity);
+                Yaw = Mathf.Clamp(localGotoPos.x * config.yawSensitivity, -config.yawSensitivity, config.yawSensitivity);
             }
-            if (version == 1) {
+            if (config.turnType == ShipConfig.TurnType.FollowScreenSpaceMouse) {
                 var mousePos = mouse.position.ReadValue();
 
                 Pitch = (mousePos.y - (Screen.height * 0.5f)) / (Screen.height * 0.5f);
                 Yaw = (mousePos.x - (Screen.width * 0.5f)) / (Screen.width * 0.5f);
 
-                Pitch = -Mathf.Clamp(Pitch, -1.0f, 1.0f);
-                Yaw = Mathf.Clamp(Yaw, -1.0f, 1.0f);
+                Pitch = -Mathf.Clamp(Pitch * config.pitchSensitivity, -config.pitchSensitivity, config.pitchSensitivity);
+                Yaw = Mathf.Clamp(Yaw * config.yawSensitivity, -config.yawSensitivity, config.yawSensitivity);
             }
         }
 
         private void CalculateRoll(Vector3 mousePos, Vector3 upVector) {
+            float inputRotation = rotationAction.ReadValue<float>() * config.customRollSensitivity;
             float bankInfluence = (mousePos.x - (Screen.width * 0.5f)) / (Screen.width * 0.5f);
             bankInfluence = Mathf.Clamp(bankInfluence, -1f, 1f) * Throttle;
 
             float bankTarget = bankInfluence * config.bankLimit;
-
             float bankError = Vector3.SignedAngle(transform.up, upVector, transform.forward) - bankTarget;
+            bankError = Mathf.Clamp(bankError * 0.1f, -1f, 1f) * config.autoRollSensitivity;
 
-            bankError = Mathf.Clamp(bankError * 0.1f, -1f, 1f);
-
-            Roll = bankError;
+            if (inputRotation != 0) Roll = inputRotation;
+            else Roll = bankError;
             Debug.Log($"mousePos: {mousePos}, upVector: {upVector} bankInfluence: {bankInfluence}, bankTarget: {bankTarget}, bankError: {bankError}, Roll: {Roll}");
         }
 

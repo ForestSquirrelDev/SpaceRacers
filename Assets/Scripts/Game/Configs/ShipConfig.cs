@@ -9,9 +9,16 @@ namespace Game.Configs {
         public float angularSpeed = 100f;
 
         [Header("Input parameters")]
+        public TurnType turnType;
         public float pitchSensitivity = 2.5f;
         public float yawSensitivity = 2.5f;
-        public float rollSensitivity = 1f;
+        public float customRollSensitivity = 3f;
+        public float autoRollSensitivity = 1f;
         public float bankLimit = 35f;
+
+        public enum TurnType {
+            FollowWorldSpaceMouse,
+            FollowScreenSpaceMouse
+        }
     }
 }
