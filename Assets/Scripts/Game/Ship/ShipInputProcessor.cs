@@ -1,10 +1,10 @@
-using SpaceRacers.Game.Ship;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Utils;
 using DG.Tweening;
 using Game.Configs;
 using System;
+using Utils.Game;
 
 namespace Game.Ship {
     public class ShipInputProcessor : IDisposable {
@@ -18,6 +18,8 @@ namespace Game.Ship {
         private FloatVariable shipThrottle;
         private ShipConfig config;
         private Transform transform;
+        private PID rollPID;
+        //private PID rollPID;
 
         private Mouse mouse;
         private ShipInputActions shipInputActions;
@@ -38,6 +40,9 @@ namespace Game.Ship {
             strafeAction = shipInputActions.Ship.StrafeAxis;
             rotationAction = shipInputActions.Ship.RotationAxis;
 
+            rollPID = new PID();
+            //rollPID = new PID();
+
             strafeAction.Enable();
             rotationAction.Enable();
 
@@ -49,7 +54,7 @@ namespace Game.Ship {
             UpdateInputAxes(deltaTime);
             FindMousePosition(out Vector3 screenPos, out Vector3 worldPos);
             CalculateTurn(worldPos);
-            CalculateRoll(screenPos, Camera.main.transform.up);
+            CalculateRoll(screenPos, Camera.main.transform.up, deltaTime);
             //Debug.Log($"Throttle: {Throttle}, strafe: {Strafe}, rotation: {Rotation}, mousePosition: {mouseWorldPosition}" +
             //    $" Roll: {Roll}, Pitch: {Pitch}, Yaw: {Yaw}");
         }
@@ -87,7 +92,7 @@ namespace Game.Ship {
         private void CalculateTurn(Vector3 gotoPos) {
             if (config.turnType == ShipConfig.TurnType.FollowWorldSpaceMouse) {
                 Vector3 localGotoPos = transform.InverseTransformVector(gotoPos - transform.position).normalized;
-
+                
                 Pitch = Mathf.Clamp(-localGotoPos.y * config.pitchSensitivity, -config.pitchSensitivity, config.pitchSensitivity);
                 Yaw = Mathf.Clamp(localGotoPos.x * config.yawSensitivity, -config.yawSensitivity, config.yawSensitivity);
             }
@@ -102,17 +107,17 @@ namespace Game.Ship {
             }
         }
 
-        private void CalculateRoll(Vector3 mousePos, Vector3 upVector) {
+        private void CalculateRoll(Vector3 mousePos, Vector3 upVector, float deltaTime) {
             float inputRotation = rotationAction.ReadValue<float>() * config.customRollSensitivity;
             float bankInfluence = (mousePos.x - (Screen.width * 0.5f)) / (Screen.width * 0.5f);
             bankInfluence = Mathf.Clamp(bankInfluence, -1f, 1f) * Throttle;
 
             float bankTarget = bankInfluence * config.bankLimit;
             float bankError = Vector3.SignedAngle(transform.up, upVector, transform.forward) - bankTarget;
-            bankError = Mathf.Clamp(bankError * 0.1f, -1f, 1f) * config.autoRollSensitivity;
-
+            bankError = /*Mathf.Clamp(*/(bankError * 0.1f)/*, -1f, 1f*//*)*/ * config.autoRollSensitivity;
+            bankError = rollPID.GetOutput(config.rollKp, config.rollKi, config.rollKd, bankError, deltaTime);
             if (inputRotation != 0) Roll = inputRotation;
-            else Roll = bankError;
+            else Roll = Mathf.MoveTowards(Roll, bankError, deltaTime* 1f);
             Debug.Log($"mousePos: {mousePos}, upVector: {upVector} bankInfluence: {bankInfluence}, bankTarget: {bankTarget}, bankError: {bankError}, Roll: {Roll}");
         }
 

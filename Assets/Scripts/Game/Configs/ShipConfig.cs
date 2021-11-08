@@ -16,6 +16,11 @@ namespace Game.Configs {
         public float autoRollSensitivity = 1f;
         public float bankLimit = 35f;
 
+        [Header("PID Input")]
+        public float rollKp = 1f;
+        public float rollKi = 0;
+        public float rollKd = 0.1f;
+
         public enum TurnType {
             FollowWorldSpaceMouse,
             FollowScreenSpaceMouse

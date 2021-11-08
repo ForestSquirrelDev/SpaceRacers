@@ -11,4 +11,4 @@ ScriptedImporter:
   generateWrapperCode: 1
   wrapperCodePath: Assets/Scripts/Game/Ship/ShipInputActions.cs
   wrapperClassName: ShipInputActions
-  wrapperCodeNamespace: SpaceRacers.Game.Ship
+  wrapperCodeNamespace: Game.Ship

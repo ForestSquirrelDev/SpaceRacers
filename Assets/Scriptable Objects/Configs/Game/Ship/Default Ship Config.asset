@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7997798e7f4f29042baa3397c9c5e9cd, type: 3}
   m_Name: Default Ship Config
   m_EditorClassIdentifier: 
-  throttleSpeed: 2000
+  throttleSpeed: 5000
   strafeSpeed: 500
   angularSpeed: 300
   turnType: 1
@@ -21,3 +21,6 @@ MonoBehaviour:
   customRollSensitivity: 0.8
   autoRollSensitivity: 0.6
   bankLimit: 35
+  rollKp: 0.2
+  rollKi: 0
+  rollKd: 1

@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace SpaceRacers.Game.Ship
+namespace Game.Ship
 {
     public partial class @ShipInputActions : IInputActionCollection2, IDisposable
     {

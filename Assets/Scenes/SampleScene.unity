@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fe185284ef4d264abfc09b6cd0d1b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  count: 1000
+  count: 100
   prefabs:
   - {fileID: 2878977054562813000, guid: 95bdd55380539c64481ebe664f22da37, type: 3}
   spawnAreaRadius: 500
