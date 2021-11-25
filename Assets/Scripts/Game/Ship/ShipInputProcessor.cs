@@ -5,6 +5,7 @@ using DG.Tweening;
 using Game.Configs;
 using System;
 using Utils.Game;
+using TMPro;
 
 namespace Game.Ship {
     public class ShipInputProcessor : IDisposable {
@@ -19,18 +20,19 @@ namespace Game.Ship {
         private ShipConfig config;
         private Transform transform;
         private PID rollPID;
-        //private PID rollPID;
+        private PID2 pid2;
 
         private Mouse mouse;
         private ShipInputActions shipInputActions;
         private InputAction strafeAction;
         private InputAction rotationAction;
+        private TMP_Text debugText;
 
         private const float throttle_speed = 0.5f;
         private const float strafe_speed = 0.5f;
         private const float rotation_speed = 0.5f;
 
-        public ShipInputProcessor(ShipConfig config, FloatVariable shipThrottle, Transform transform) {
+        public ShipInputProcessor(ShipConfig config, FloatVariable shipThrottle, Transform transform, PID2 pid2, TMP_Text text) {
             this.config = config;
             this.shipThrottle = shipThrottle;
             this.transform = transform;
@@ -41,7 +43,8 @@ namespace Game.Ship {
             rotationAction = shipInputActions.Ship.RotationAxis;
 
             rollPID = new PID();
-            //rollPID = new PID();
+            this.pid2 = pid2;
+            this.debugText = text;
 
             strafeAction.Enable();
             rotationAction.Enable();
@@ -55,8 +58,6 @@ namespace Game.Ship {
             FindMousePosition(out Vector3 screenPos, out Vector3 worldPos);
             CalculateTurn(worldPos);
             CalculateRoll(screenPos, Camera.main.transform.up, deltaTime);
-            //Debug.Log($"Throttle: {Throttle}, strafe: {Strafe}, rotation: {Rotation}, mousePosition: {mouseWorldPosition}" +
-            //    $" Roll: {Roll}, Pitch: {Pitch}, Yaw: {Yaw}");
         }
 
         public void Dispose() {
@@ -107,22 +108,31 @@ namespace Game.Ship {
             }
         }
 
-        private void CalculateRoll(Vector3 mousePos, Vector3 upVector, float deltaTime) {
+        private void CalculateRoll(Vector3 mousePos, Vector3 cameraUp, float deltaTime) {
+            string s = "";
+
             float inputRotation = rotationAction.ReadValue<float>() * config.customRollSensitivity;
             float bankInfluence = (mousePos.x - (Screen.width * 0.5f)) / (Screen.width * 0.5f);
-            bankInfluence = Mathf.Clamp(bankInfluence, -1f, 1f) * Throttle;
+            bankInfluence *= Throttle;
 
             float bankTarget = bankInfluence * config.bankLimit;
-            float bankError = Vector3.SignedAngle(transform.up, upVector, transform.forward) - bankTarget;
-            bankError = /*Mathf.Clamp(*/(bankError * 0.1f)/*, -1f, 1f*//*)*/ * config.autoRollSensitivity;
+            float bankError = Vector3.SignedAngle(transform.up, cameraUp, transform.forward) - bankTarget;
+
+            s = s + $" angle: {bankError}";
+
+            bankError = bankError * 0.1f * config.autoRollSensitivity;
             bankError = rollPID.GetOutput(config.rollKp, config.rollKi, config.rollKd, bankError, deltaTime);
             if (inputRotation != 0) Roll = inputRotation;
-            else Roll = Mathf.MoveTowards(Roll, bankError, deltaTime* 1f);
-            Debug.Log($"mousePos: {mousePos}, upVector: {upVector} bankInfluence: {bankInfluence}, bankTarget: {bankTarget}, bankError: {bankError}, Roll: {Roll}");
+            else Roll = Mathf.MoveTowards(Roll, bankError, deltaTime * 1f);
+
+            s = s + " " + $"mousePos: {mousePos}, upVector: {cameraUp} bankInfluence: " +
+                $"{bankInfluence}, bankTarget: {bankTarget}, bankError: {bankError}, Roll: {Roll}";
+
+            this.debugText.text = s;
         }
 
         private void OnSliderThrottleChanged(float value) {
             DOTween.To(() => Throttle, x => Throttle = x, value, throttle_speed);
         }
     }
-}
+}   
