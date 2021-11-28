@@ -21,6 +21,6 @@ MonoBehaviour:
   customRollSensitivity: 1
   autoRollSensitivity: 1
   bankLimit: 35
-  rollKp: 0.1
-  rollKi: 0.1
+  rollKp: 1
+  rollKi: 0.2
   rollKd: 0.1

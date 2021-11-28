@@ -4,8 +4,9 @@ using Utils;
 using DG.Tweening;
 using Game.Configs;
 using System;
-using Utils.Game;
 using TMPro;
+using Utils.Maths;
+using Utils.Vectors;
 
 namespace Game.Ship {
     public class ShipInputProcessor : IDisposable {
@@ -16,11 +17,11 @@ namespace Game.Ship {
         public float Pitch { get; private set; }
         public float Yaw { get; private set; }
 
+        private Vector2 mouseInput;
+
         private FloatVariable shipThrottle;
         private ShipConfig config;
         private Transform transform;
-        private PID rollPID;
-        private PID2 pid2;
 
         private Mouse mouse;
         private ShipInputActions shipInputActions;
@@ -32,7 +33,7 @@ namespace Game.Ship {
         private const float strafe_speed = 0.5f;
         private const float rotation_speed = 0.5f;
 
-        public ShipInputProcessor(ShipConfig config, FloatVariable shipThrottle, Transform transform, PID2 pid2, TMP_Text text) {
+        public ShipInputProcessor(ShipConfig config, FloatVariable shipThrottle, Transform transform, TMP_Text text) {
             this.config = config;
             this.shipThrottle = shipThrottle;
             this.transform = transform;
@@ -42,8 +43,6 @@ namespace Game.Ship {
             strafeAction = shipInputActions.Ship.StrafeAxis;
             rotationAction = shipInputActions.Ship.RotationAxis;
 
-            rollPID = new PID();
-            this.pid2 = pid2;
             this.debugText = text;
 
             strafeAction.Enable();
@@ -88,45 +87,38 @@ namespace Game.Ship {
             Vector2 mouseInput = mouse.position.ReadValue();
             mousePos = new Vector3(mouseInput.x, mouseInput.y, 1000f);
             gotoPos = Camera.main.ScreenToWorldPoint(mousePos);
+
+            var inputY = (mouseInput.y - (Screen.height * 0.5f)) / (Screen.height * 0.5f);
+            var inputX = (mouseInput.x - (Screen.width * 0.5f)) / (Screen.width * 0.5f);
+
+            this.mouseInput = new Vector2(inputX, inputY).ClampNeg1To1();
         }
 
         private void CalculateTurn(Vector3 gotoPos) {
-            if (config.turnType == ShipConfig.TurnType.FollowWorldSpaceMouse) {
-                Vector3 localGotoPos = transform.InverseTransformVector(gotoPos - transform.position).normalized;
+            Vector3 localGotoPos = transform.InverseTransformVector(gotoPos - transform.position).normalized;
                 
-                Pitch = Mathf.Clamp(-localGotoPos.y * config.pitchSensitivity, -config.pitchSensitivity, config.pitchSensitivity);
-                Yaw = Mathf.Clamp(localGotoPos.x * config.yawSensitivity, -config.yawSensitivity, config.yawSensitivity);
-            }
-            if (config.turnType == ShipConfig.TurnType.FollowScreenSpaceMouse) {
-                var mousePos = mouse.position.ReadValue();
-
-                Pitch = (mousePos.y - (Screen.height * 0.5f)) / (Screen.height * 0.5f);
-                Yaw = (mousePos.x - (Screen.width * 0.5f)) / (Screen.width * 0.5f);
-
-                Pitch = -Mathf.Clamp(Pitch * config.pitchSensitivity, -config.pitchSensitivity, config.pitchSensitivity);
-                Yaw = Mathf.Clamp(Yaw * config.yawSensitivity, -config.yawSensitivity, config.yawSensitivity);
-            }
+            Pitch = Mathf.Clamp(localGotoPos.x * config.pitchSensitivity, -config.pitchSensitivity, config.pitchSensitivity);
+            Yaw = Mathf.Clamp(-localGotoPos.y * config.yawSensitivity, -config.yawSensitivity, config.yawSensitivity);
         }
 
         private void CalculateRoll(Vector3 mousePos, Vector3 cameraUp, float deltaTime) {
             string s = "";
 
             float inputRotation = rotationAction.ReadValue<float>() * config.customRollSensitivity;
-            float bankInfluence = (mousePos.x - (Screen.width * 0.5f)) / (Screen.width * 0.5f);
-            bankInfluence *= Throttle;
 
-            float bankTarget = bankInfluence * config.bankLimit;
-            float bankError = Vector3.SignedAngle(transform.up, cameraUp, transform.forward) - bankTarget;
+            float rollInfluence = -mouseInput.x * Throttle;
+            float yInfluence = MathfExtensions.InverseRelationship(3f, mouseInput.y * 10f);
+            yInfluence = Mathf.Clamp(Mathf.Abs(yInfluence), float.MinValue, 1f);
+            rollInfluence *= yInfluence;
+            rollInfluence *= config.autoRollSensitivity;
 
-            s = s + $" angle: {bankError}";
-
-            bankError = bankError * 0.1f * config.autoRollSensitivity;
-            bankError = rollPID.GetOutput(config.rollKp, config.rollKi, config.rollKd, bankError, deltaTime);
             if (inputRotation != 0) Roll = inputRotation;
-            else Roll = Mathf.MoveTowards(Roll, bankError, deltaTime * 1f);
+            else Roll = Mathf.MoveTowards(Roll, rollInfluence, deltaTime * 1f);
 
-            s = s + " " + $"mousePos: {mousePos}, upVector: {cameraUp} bankInfluence: " +
-                $"{bankInfluence}, bankTarget: {bankTarget}, bankError: {bankError}, Roll: {Roll}";
+            s = s + " " + $"mousePos: {mousePos}, bankError: {rollInfluence}, Roll: {Roll}, " +
+                $"transform up :{ transform.up} cam: {cameraUp} , " +
+                $"yInfluence: {yInfluence}" +
+                $"rough mouse y: {mouseInput.y}, yinfluence: {yInfluence}";
 
             this.debugText.text = s;
         }
@@ -135,4 +127,4 @@ namespace Game.Ship {
             DOTween.To(() => Throttle, x => Throttle = x, value, throttle_speed);
         }
     }
-}   
+}

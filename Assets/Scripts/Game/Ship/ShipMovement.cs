@@ -19,7 +19,7 @@ namespace Game.Ship {
                 y: 0f,
                 z: input.Throttle * config.throttleSpeed,
                 mode: ForceMode.Force);
-            rb.AddRelativeTorque(new Vector3(input.Pitch, input.Yaw, input.Roll) * config.angularSpeed);
+            rb.AddRelativeTorque(new Vector3(input.Yaw, input.Pitch, input.Roll) * config.angularSpeed);
         }
     }
 }
