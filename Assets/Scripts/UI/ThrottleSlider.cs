@@ -5,8 +5,8 @@ using Utils;
 namespace UI
 {
     public class ThrottleSlider : MonoBehaviour {
-        [SerializeField] private Slider slider;
-        [SerializeField] private FloatVariable shipThrottle;
+        [SerializeField] Slider slider;
+        [SerializeField] FloatVariable shipThrottle;
 
         private bool invokeCallback = true;
 

@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace Game.Environment {
     public class CubesSpawner : MonoBehaviour {
-        [SerializeField] private int count = 10;
-        [SerializeField] private GameObject[] prefabs;
-        [SerializeField] private float spawnAreaRadius = 100.0f;
+        [SerializeField] int count = 10;
+        [SerializeField] GameObject[] prefabs;
+        [SerializeField] float spawnAreaRadius = 100.0f;
         [SerializeField] Vector2 scaleRange = new Vector2(5f, 20f);
 
         private void Start() => SpawnCubes();

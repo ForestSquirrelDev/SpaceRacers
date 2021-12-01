@@ -13,6 +13,9 @@ namespace Game.Configs {
         public float yawSensitivity = 2.5f;
         public float customRollSensitivity = 3f;
         public float autoRollSensitivity = 1f;
+        public float throttleSensitivity = 0.5f;
+        public float strafeSensitivity = 0.5f;
+        public float rorationSensitivity = 0.5f;
 
         [Header("PID Input")]
         public float rollKp = 1f;

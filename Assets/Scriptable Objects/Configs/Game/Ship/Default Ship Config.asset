@@ -15,12 +15,10 @@ MonoBehaviour:
   throttleSpeed: 5000
   strafeSpeed: 500
   angularSpeed: 300
-  turnType: 0
-  pitchSensitivity: 3
-  yawSensitivity: 2
-  customRollSensitivity: 1
-  autoRollSensitivity: 1
-  bankLimit: 35
+  pitchSensitivity: 2.5
+  yawSensitivity: 3
+  customRollSensitivity: 0.45
+  autoRollSensitivity: 0.6
   rollKp: 1
   rollKi: 0.2
   rollKd: 0.1

@@ -27,13 +27,8 @@ namespace Game.Ship {
         private ShipInputActions shipInputActions;
         private InputAction strafeAction;
         private InputAction rotationAction;
-        private TMP_Text debugText;
 
-        private const float throttle_speed = 0.5f;
-        private const float strafe_speed = 0.5f;
-        private const float rotation_speed = 0.5f;
-
-        public ShipInputProcessor(ShipConfig config, FloatVariable shipThrottle, Transform transform, TMP_Text text) {
+        public ShipInputProcessor(ShipConfig config, FloatVariable shipThrottle, Transform transform) {
             this.config = config;
             this.shipThrottle = shipThrottle;
             this.transform = transform;
@@ -42,8 +37,6 @@ namespace Game.Ship {
             shipInputActions = new ShipInputActions();
             strafeAction = shipInputActions.Ship.StrafeAxis;
             rotationAction = shipInputActions.Ship.RotationAxis;
-
-            this.debugText = text;
 
             strafeAction.Enable();
             rotationAction.Enable();
@@ -54,9 +47,9 @@ namespace Game.Ship {
         public void Update(float deltaTime) {
             UpdateKeyboardThrottle(deltaTime);
             UpdateInputAxes(deltaTime);
-            FindMousePosition(out Vector3 screenPos, out Vector3 worldPos);
+            FindMousePosition(out Vector3 worldPos);
             CalculateTurn(worldPos);
-            CalculateRoll(screenPos, Camera.main.transform.up, deltaTime);
+            CalculateRoll(deltaTime);
         }
 
         public void Dispose() {
@@ -68,24 +61,24 @@ namespace Game.Ship {
         private void UpdateInputAxes(float deltaTime) {
             float strafe = strafeAction.ReadValue<float>();
             float rotation = rotationAction.ReadValue<float>();
-            Strafe = Mathf.MoveTowards(Strafe, strafe, deltaTime * strafe_speed);
-            Rotation = Mathf.MoveTowards(Rotation, rotation, deltaTime * rotation_speed);
+            Strafe = Mathf.MoveTowards(Strafe, strafe, deltaTime * config.strafeSensitivity);
+            Rotation = Mathf.MoveTowards(Rotation, rotation, deltaTime * config.rorationSensitivity);
         }
 
         private void UpdateKeyboardThrottle(float deltaTime) {
             if (Input.GetKey(KeyCode.W)) {
-                Throttle = Mathf.MoveTowards(Throttle, 1f, deltaTime * throttle_speed);
+                Throttle = Mathf.MoveTowards(Throttle, 1f, deltaTime * config.throttleSensitivity);
                 shipThrottle.SetValue(Throttle, false);
             }
             if (Input.GetKey(KeyCode.S)) {
-                Throttle = Mathf.MoveTowards(Throttle, 0f, deltaTime * throttle_speed);
+                Throttle = Mathf.MoveTowards(Throttle, 0f, deltaTime * config.throttleSensitivity);
                 shipThrottle.SetValue(Throttle, false);
             }
         }
 
-        private void FindMousePosition(out Vector3 mousePos, out Vector3 gotoPos) {
+        private void FindMousePosition(out Vector3 gotoPos) {
             Vector2 mouseInput = mouse.position.ReadValue();
-            mousePos = new Vector3(mouseInput.x, mouseInput.y, 1000f);
+            Vector3 mousePos = new Vector3(mouseInput.x, mouseInput.y, 1000f);
             gotoPos = Camera.main.ScreenToWorldPoint(mousePos);
 
             var inputY = (mouseInput.y - (Screen.height * 0.5f)) / (Screen.height * 0.5f);
@@ -101,9 +94,7 @@ namespace Game.Ship {
             Yaw = Mathf.Clamp(-localGotoPos.y * config.yawSensitivity, -config.yawSensitivity, config.yawSensitivity);
         }
 
-        private void CalculateRoll(Vector3 mousePos, Vector3 cameraUp, float deltaTime) {
-            string s = "";
-
+        private void CalculateRoll(float deltaTime) {
             float inputRotation = rotationAction.ReadValue<float>() * config.customRollSensitivity;
 
             float rollInfluence = -mouseInput.x * Throttle;
@@ -112,19 +103,12 @@ namespace Game.Ship {
             rollInfluence *= yInfluence;
             rollInfluence *= config.autoRollSensitivity;
 
-            if (inputRotation != 0) Roll = inputRotation;
+            if (inputRotation != 0) Roll = inputRotation * config.customRollSensitivity;
             else Roll = Mathf.MoveTowards(Roll, rollInfluence, deltaTime * 1f);
-
-            s = s + " " + $"mousePos: {mousePos}, bankError: {rollInfluence}, Roll: {Roll}, " +
-                $"transform up :{ transform.up} cam: {cameraUp} , " +
-                $"yInfluence: {yInfluence}" +
-                $"rough mouse y: {mouseInput.y}, yinfluence: {yInfluence}";
-
-            this.debugText.text = s;
         }
 
         private void OnSliderThrottleChanged(float value) {
-            DOTween.To(() => Throttle, x => Throttle = x, value, throttle_speed);
+            DOTween.To(() => Throttle, x => Throttle = x, value, config.throttleSensitivity);
         }
     }
 }
