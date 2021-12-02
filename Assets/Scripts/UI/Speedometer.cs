@@ -1,9 +1,9 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Utils;
+using Utils.ScriptableObjects;
 
-namespace UI { 
+namespace UI {
     public class Speedometer : MonoBehaviour {
         [SerializeField] Image leftFillable, rightFillable;
         [SerializeField] FloatVariable shipSpeed, shipTopSpeed;

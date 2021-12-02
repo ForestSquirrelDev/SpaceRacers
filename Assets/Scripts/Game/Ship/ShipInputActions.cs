@@ -40,9 +40,9 @@ namespace Game.Ship
                 },
                 {
                     ""name"": ""Rotation Axis"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""5e2553ce-3c41-4f3f-949e-f3fcdf304bf6"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": true
@@ -94,7 +94,7 @@ namespace Game.Ship
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""negative"",
+                    ""name"": ""Negative"",
                     ""id"": ""9ec51ed0-5160-4f0d-a0d0-2da558f57f2a"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
@@ -105,7 +105,7 @@ namespace Game.Ship
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""positive"",
+                    ""name"": ""Positive"",
                     ""id"": ""ff79ac10-fbac-4c47-b722-4f96809dff9b"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",

@@ -1,9 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
-using Utils;
+using Utils.ScriptableObjects;
 
-namespace UI
-{
+namespace UI {
     public class ThrottleSlider : MonoBehaviour {
         [SerializeField] Slider slider;
         [SerializeField] FloatVariable shipThrottle;

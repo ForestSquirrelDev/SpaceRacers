@@ -1,10 +1,8 @@
 using UnityEngine;
 using System;
 
-namespace Utils
-{
-    public class ReferenceableVariable<T> : ScriptableObject
-    {
+namespace Utils.ScriptableObjects {
+    public class ReferenceableVariable<T> : ScriptableObject {
         public event Action<T> OnValueChanged;
 
         public T Value => value;

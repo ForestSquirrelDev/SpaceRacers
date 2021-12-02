@@ -1,6 +1,6 @@
 using Game.Configs;
 using UnityEngine;
-using Utils;
+using Utils.ScriptableObjects;
 
 namespace Game.Ship {
     public class ShipController : MonoBehaviour {
@@ -11,6 +11,7 @@ namespace Game.Ship {
         [SerializeField] FloatVariable shipThrottle;
         [SerializeField] FloatVariable shipSpeed;
         [SerializeField] FloatVariable shipTopSpeed;
+        [SerializeField] TransformVariable shipTransform;
 
         private ShipInputProcessor input;
         private ShipMovement movement;
@@ -18,6 +19,7 @@ namespace Game.Ship {
         private void Awake() {
             input = new ShipInputProcessor(shipConfig, shipThrottle, transform);
             movement = new ShipMovement(GetComponent<Rigidbody>(), shipConfig, input, shipSpeed, shipTopSpeed);
+            shipTransform.SetValue(transform, true);
         }
 
         private void FixedUpdate() {

@@ -1,12 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Utils;
 using DG.Tweening;
 using Game.Configs;
 using System;
-using TMPro;
 using Utils.Maths;
 using Utils.Vectors;
+using Utils.ScriptableObjects;
 
 namespace Game.Ship {
     public class ShipInputProcessor : IDisposable {
@@ -95,8 +94,8 @@ namespace Game.Ship {
         }
 
         private void CalculateRoll(float deltaTime) {
-            float inputRotation = rotationAction.ReadValue<float>() * config.customRollSensitivity;
-
+            float inputRotation = Input.GetAxis("Roll");
+            Debug.Log($"Input rotation is: {inputRotation}");
             float rollInfluence = -mouseInput.x * Throttle;
             float yInfluence = MathfExtensions.InverseRelationship(3f, mouseInput.y * 10f);
             yInfluence = Mathf.Clamp(Mathf.Abs(yInfluence), float.MinValue, 1f);
