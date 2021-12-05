@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utils.ScriptableObjects;
 
-namespace UI {
+namespace UI.HUD {
     public class ThrottleSlider : MonoBehaviour {
         [SerializeField] Slider slider;
         [SerializeField] FloatVariable shipThrottle;
@@ -14,11 +14,11 @@ namespace UI {
         }
 
         private void Update() {
-            if (slider.value != shipThrottle.Value) {
+            if (slider.value != shipThrottle.ModifiedValue()) {
                 invokeCallback = false;
-                slider.value = shipThrottle.Value;
+                slider.value = shipThrottle.ModifiedValue();
                 invokeCallback = true;
-            } 
+            }
         }
 
         private void OnDisable() {

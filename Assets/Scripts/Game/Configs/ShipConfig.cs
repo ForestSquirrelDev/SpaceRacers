@@ -4,7 +4,7 @@ namespace Game.Configs {
     [CreateAssetMenu(menuName = "Configs/Game/Ship Config")]
     public class ShipConfig : ScriptableObject {
         [Header("Movement parameters")]
-        public float throttleSpeed = 100f;
+        public float throttlePower = 5000f;
         public float strafeSpeed = 100f;
         public float angularSpeed = 100f;
 
@@ -16,6 +16,12 @@ namespace Game.Configs {
         public float throttleSensitivity = 0.5f;
         public float strafeSensitivity = 0.5f;
         public float rorationSensitivity = 0.5f;
+
+        [Header("Nitro")]
+        public float nitroPower = 1.5f;
+        public float nitroSensitivity = 3f;
+        public float nitroCapacity = 10f;
+        public float nitroRechargeSpeed = 1f;
 
         [Header("PID Input")]
         public float rollKp = 1f;

@@ -46,6 +46,15 @@ namespace Game.Ship
                     ""processors"": """",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Nitro"",
+                    ""type"": ""Button"",
+                    ""id"": ""69e8d34c-becf-4ce9-9a38-dd1fa144736d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -114,6 +123,17 @@ namespace Game.Ship
                     ""action"": ""Rotation Axis"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fd3104e2-7eae-45ad-9e1a-03c6f8ac6e74"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Nitro"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -124,6 +144,7 @@ namespace Game.Ship
             m_Ship = asset.FindActionMap("Ship", throwIfNotFound: true);
             m_Ship_StrafeAxis = m_Ship.FindAction("Strafe Axis", throwIfNotFound: true);
             m_Ship_RotationAxis = m_Ship.FindAction("Rotation Axis", throwIfNotFound: true);
+            m_Ship_Nitro = m_Ship.FindAction("Nitro", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -185,12 +206,14 @@ namespace Game.Ship
         private IShipActions m_ShipActionsCallbackInterface;
         private readonly InputAction m_Ship_StrafeAxis;
         private readonly InputAction m_Ship_RotationAxis;
+        private readonly InputAction m_Ship_Nitro;
         public struct ShipActions
         {
             private @ShipInputActions m_Wrapper;
             public ShipActions(@ShipInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @StrafeAxis => m_Wrapper.m_Ship_StrafeAxis;
             public InputAction @RotationAxis => m_Wrapper.m_Ship_RotationAxis;
+            public InputAction @Nitro => m_Wrapper.m_Ship_Nitro;
             public InputActionMap Get() { return m_Wrapper.m_Ship; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -206,6 +229,9 @@ namespace Game.Ship
                     @RotationAxis.started -= m_Wrapper.m_ShipActionsCallbackInterface.OnRotationAxis;
                     @RotationAxis.performed -= m_Wrapper.m_ShipActionsCallbackInterface.OnRotationAxis;
                     @RotationAxis.canceled -= m_Wrapper.m_ShipActionsCallbackInterface.OnRotationAxis;
+                    @Nitro.started -= m_Wrapper.m_ShipActionsCallbackInterface.OnNitro;
+                    @Nitro.performed -= m_Wrapper.m_ShipActionsCallbackInterface.OnNitro;
+                    @Nitro.canceled -= m_Wrapper.m_ShipActionsCallbackInterface.OnNitro;
                 }
                 m_Wrapper.m_ShipActionsCallbackInterface = instance;
                 if (instance != null)
@@ -216,6 +242,9 @@ namespace Game.Ship
                     @RotationAxis.started += instance.OnRotationAxis;
                     @RotationAxis.performed += instance.OnRotationAxis;
                     @RotationAxis.canceled += instance.OnRotationAxis;
+                    @Nitro.started += instance.OnNitro;
+                    @Nitro.performed += instance.OnNitro;
+                    @Nitro.canceled += instance.OnNitro;
                 }
             }
         }
@@ -224,6 +253,7 @@ namespace Game.Ship
         {
             void OnStrafeAxis(InputAction.CallbackContext context);
             void OnRotationAxis(InputAction.CallbackContext context);
+            void OnNitro(InputAction.CallbackContext context);
         }
     }
 }

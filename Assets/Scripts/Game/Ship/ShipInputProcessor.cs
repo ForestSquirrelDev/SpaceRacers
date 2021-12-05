@@ -6,6 +6,7 @@ using System;
 using Utils.Maths;
 using Utils.Vectors;
 using Utils.ScriptableObjects;
+using static UnityEngine.InputSystem.InputAction;
 
 namespace Game.Ship {
     public class ShipInputProcessor : IDisposable {
@@ -15,6 +16,7 @@ namespace Game.Ship {
         public float Roll { get; private set; }
         public float Pitch { get; private set; }
         public float Yaw { get; private set; }
+        public bool NitroRequired { get; private set; }
 
         private Vector2 mouseInput;
 
@@ -26,6 +28,7 @@ namespace Game.Ship {
         private ShipInputActions shipInputActions;
         private InputAction strafeAction;
         private InputAction rotationAction;
+        private InputAction nitroAction;
 
         public ShipInputProcessor(ShipConfig config, FloatVariable shipThrottle, Transform transform) {
             this.config = config;
@@ -36,10 +39,13 @@ namespace Game.Ship {
             shipInputActions = new ShipInputActions();
             strafeAction = shipInputActions.Ship.StrafeAxis;
             rotationAction = shipInputActions.Ship.RotationAxis;
+            nitroAction = shipInputActions.Ship.Nitro;
 
             strafeAction.Enable();
             rotationAction.Enable();
+            nitroAction.Enable();
 
+            nitroAction.performed += SetNitroRequired;
             shipThrottle.OnValueChanged += OnSliderThrottleChanged;
         }
 
@@ -54,6 +60,8 @@ namespace Game.Ship {
         public void Dispose() {
             strafeAction.Disable();
             rotationAction.Disable();
+            nitroAction.Disable();
+            nitroAction.performed -= SetNitroRequired;
             shipThrottle.OnValueChanged -= OnSliderThrottleChanged;
         }
 
@@ -95,7 +103,6 @@ namespace Game.Ship {
 
         private void CalculateRoll(float deltaTime) {
             float inputRotation = Input.GetAxis("Roll");
-            Debug.Log($"Input rotation is: {inputRotation}");
             float rollInfluence = -mouseInput.x * Throttle;
             float yInfluence = MathfExtensions.InverseRelationship(3f, mouseInput.y * 10f);
             yInfluence = Mathf.Clamp(Mathf.Abs(yInfluence), float.MinValue, 1f);
@@ -108,6 +115,10 @@ namespace Game.Ship {
 
         private void OnSliderThrottleChanged(float value) {
             DOTween.To(() => Throttle, x => Throttle = x, value, config.throttleSensitivity);
+        }
+
+        private void SetNitroRequired(CallbackContext callback) {
+            NitroRequired = !NitroRequired;
         }
     }
 }

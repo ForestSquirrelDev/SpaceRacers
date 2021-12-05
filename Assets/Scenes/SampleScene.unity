@@ -209,7 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 177718036}
   m_Layer: 5
-  m_Name: LeftSide_rectParent
+  m_Name: Image_rectParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -230,7 +230,7 @@ RectTransform:
   - {fileID: 356776973}
   - {fileID: 2140925762}
   m_Father: {fileID: 531006992}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -656,7 +656,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 707332990}
   - {fileID: 177718036}
   - {fileID: 1944841296}
   - {fileID: 1336883110}
@@ -815,7 +814,7 @@ GameObject:
   m_Component:
   - component: {fileID: 707332990}
   m_Layer: 5
-  m_Name: RightSide_rectParent
+  m_Name: Image_rectParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -828,15 +827,15 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 707332989}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1512500757}
   - {fileID: 174595223}
-  m_Father: {fileID: 531006992}
-  m_RootOrder: 0
+  m_Father: {fileID: 1879007671}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -940,6 +939,7 @@ RectTransform:
   - {fileID: 531006992}
   - {fileID: 2023435670}
   - {fileID: 300696361}
+  - {fileID: 1879007671}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -948,6 +948,42 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &841891114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 841891115}
+  m_Layer: 5
+  m_Name: Nitro_script
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &841891115
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841891114}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1879007671}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &856592462 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1404724577958374, guid: e261f7b66a8f0fd4492d87df1eee4222, type: 3}
@@ -985,6 +1021,8 @@ MonoBehaviour:
   shipThrottle: {fileID: 11400000, guid: ca5f450dd59ede74d9c46334ff16989e, type: 2}
   shipSpeed: {fileID: 11400000, guid: 545c6dc6edab1434bb45b8e367dd74d5, type: 2}
   shipTopSpeed: {fileID: 11400000, guid: 150ecd6b2a0cd66439a9c64a1018b92e, type: 2}
+  shipThrottlePower: {fileID: 11400000, guid: 7f6c1ac72c886f04c992f2e8094898fc, type: 2}
+  shipNitroBank: {fileID: 11400000, guid: f0e0e1233d88c2a48b765fd6d64dbffd, type: 2}
   shipTransform: {fileID: 11400000, guid: 651930ab210896241bab8ecb1919535d, type: 2}
 --- !u!4 &856592465 stripped
 Transform:
@@ -1242,7 +1280,7 @@ GameObject:
   - component: {fileID: 1336883112}
   - component: {fileID: 1336883111}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Speed_txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1261,7 +1299,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 531006992}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1840,6 +1878,59 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1879007670
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1879007671}
+  - component: {fileID: 1879007672}
+  m_Layer: 5
+  m_Name: Nitro
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1879007671
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879007670}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 841891115}
+  - {fileID: 707332990}
+  m_Father: {fileID: 721561504}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1879007672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879007670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5295b34b605158347b9548f9f89836cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shipNitroBank: {fileID: 11400000, guid: f0e0e1233d88c2a48b765fd6d64dbffd, type: 2}
+  fillable: {fileID: 174595224}
 --- !u!1 &1944841295
 GameObject:
   m_ObjectHideFlags: 0
@@ -1870,7 +1961,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 531006992}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1889,8 +1980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f28f13e2680fa14a8a8057cce0cf1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftFillable: {fileID: 2140925763}
-  rightFillable: {fileID: 174595224}
+  fillable: {fileID: 2140925763}
   shipSpeed: {fileID: 11400000, guid: 545c6dc6edab1434bb45b8e367dd74d5, type: 2}
   shipTopSpeed: {fileID: 11400000, guid: 150ecd6b2a0cd66439a9c64a1018b92e, type: 2}
   speedText: {fileID: 1336883111}

@@ -15,7 +15,7 @@ namespace UI.HUD {
         }
 
         private void Update() {
-            Vector3 boresightPos = (shipTransform.Value.forward * boresightDistance) + shipTransform.Value.position;
+            Vector3 boresightPos = (shipTransform.ModifiedValue().forward * boresightDistance) + shipTransform.ModifiedValue().position;
             Vector3 screenPos = cam.WorldToScreenPoint(boresightPos);
             screenPos.z = 0f;
 

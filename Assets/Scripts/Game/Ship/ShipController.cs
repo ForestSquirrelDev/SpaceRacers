@@ -7,18 +7,22 @@ namespace Game.Ship {
         [Header("Configs")]
         [SerializeField] ShipConfig shipConfig;
 
-        [Header("Referenceable variables")]
+        [Header("Scriptable variables")]
         [SerializeField] FloatVariable shipThrottle;
         [SerializeField] FloatVariable shipSpeed;
         [SerializeField] FloatVariable shipTopSpeed;
+        [SerializeField] FloatVariable shipThrottlePower;
+        [SerializeField] FloatVariable shipNitroBank;
         [SerializeField] TransformVariable shipTransform;
 
         private ShipInputProcessor input;
         private ShipMovement movement;
+        private NitroBooster nitroBooster;
 
         private void Awake() {
             input = new ShipInputProcessor(shipConfig, shipThrottle, transform);
-            movement = new ShipMovement(GetComponent<Rigidbody>(), shipConfig, input, shipSpeed, shipTopSpeed);
+            movement = new ShipMovement(GetComponent<Rigidbody>(), shipConfig, input, shipSpeed, shipTopSpeed, shipThrottlePower);
+            nitroBooster = new NitroBooster(shipThrottlePower, shipConfig, shipNitroBank, input);
             shipTransform.SetValue(transform, true);
         }
 
@@ -27,7 +31,9 @@ namespace Game.Ship {
         }
 
         private void Update() {
-            input.Update(Time.deltaTime);
+            float dt = Time.deltaTime;
+            input.Update(dt);
+            nitroBooster.Update(dt);
         }
 
         private void OnDestroy() {
