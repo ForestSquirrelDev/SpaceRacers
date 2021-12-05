@@ -61,6 +61,7 @@ namespace Game.Ship {
             strafeAction.Disable();
             rotationAction.Disable();
             nitroAction.Disable();
+
             nitroAction.performed -= SetNitroRequired;
             shipThrottle.OnValueChanged -= OnSliderThrottleChanged;
         }

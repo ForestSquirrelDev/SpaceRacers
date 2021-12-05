@@ -10,7 +10,7 @@ namespace Game.Ship {
         ShipInputProcessor input;
         ReferenceableVariable<float> nitro = new ReferenceableVariable<float>(1f);
 
-        float maxCapacity;
+        readonly float maxCapacity;
 
         public NitroBooster(FloatVariable throttlePower, ShipConfig config, FloatVariable nitroBank, ShipInputProcessor input) {
             this.throttlePower = throttlePower;
