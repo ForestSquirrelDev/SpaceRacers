@@ -765,6 +765,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.05
   m_Center: {x: 0, y: -0.06, z: 0}
+--- !u!114 &491668305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491668302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696897863c0667f4da97f358c159ca53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allStargates: {fileID: 11400000, guid: 5275758ef6994f246b4d31c25f2cb222, type: 2}
 --- !u!1 &531006991
 GameObject:
   m_ObjectHideFlags: 0
@@ -1462,6 +1475,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.05
   m_Center: {x: 0, y: -0.06, z: 0}
+--- !u!114 &1120543746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120543743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696897863c0667f4da97f358c159ca53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allStargates: {fileID: 11400000, guid: 5275758ef6994f246b4d31c25f2cb222, type: 2}
 --- !u!1 &1141511362
 GameObject:
   m_ObjectHideFlags: 0
@@ -2043,6 +2069,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.05
   m_Center: {x: 0, y: -0.06, z: 0}
+--- !u!114 &1586127022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586127019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696897863c0667f4da97f358c159ca53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allStargates: {fileID: 11400000, guid: 5275758ef6994f246b4d31c25f2cb222, type: 2}
 --- !u!1 &1675145774
 GameObject:
   m_ObjectHideFlags: 0
@@ -2179,8 +2218,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
-  m_LocalRotation: {x: 0.12264883, y: -0, z: -0, w: 0.9924502}
-  m_LocalPosition: {x: 0, y: 5.5, z: -17.64}
+  m_LocalRotation: {x: 0, y: -0.69069314, z: -0, w: 0.723148}
+  m_LocalPosition: {x: 193.63, y: 7.46, z: 80.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2260,6 +2299,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.05
   m_Center: {x: 0, y: -0.06, z: 0}
+--- !u!114 &1714489315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714489312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696897863c0667f4da97f358c159ca53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allStargates: {fileID: 11400000, guid: 5275758ef6994f246b4d31c25f2cb222, type: 2}
 --- !u!1 &1853064192
 GameObject:
   m_ObjectHideFlags: 0
@@ -2628,6 +2680,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.05
   m_Center: {x: 0, y: -0.06, z: 0}
+--- !u!114 &2024066660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024066657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696897863c0667f4da97f358c159ca53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allStargates: {fileID: 11400000, guid: 5275758ef6994f246b4d31c25f2cb222, type: 2}
 --- !u!1 &2088430456
 GameObject:
   m_ObjectHideFlags: 0
@@ -2982,6 +3047,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.05
   m_Center: {x: 0, y: -0.06, z: 0}
+--- !u!114 &919132148168579732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148168579730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696897863c0667f4da97f358c159ca53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allStargates: {fileID: 11400000, guid: 5275758ef6994f246b4d31c25f2cb222, type: 2}
 --- !u!1001 &3983059165227239555
 PrefabInstance:
   m_ObjectHideFlags: 0

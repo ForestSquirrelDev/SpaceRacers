@@ -10,7 +10,7 @@ namespace Utils.ScriptableObjects.Variables {
         public delegate T Modify(T t1, T t2);
         public T BaseValue => value;
 
-        [SerializeField] private string developerDescription;
+        [SerializeField, TextArea(5, 10)] private string developerDescription;
         [NonSerialized] private T value;
         [NonSerialized] private Dictionary<ReferenceableVariable<T>, Modify> modifiers = new();
 

@@ -6,7 +6,8 @@ using UnityEngine;
 namespace Utils {
     public class RuntimeSet<T> : ScriptableObject {
         public ReadOnlyCollection<T> Items => items.AsReadOnly();
-        [SerializeField] private string developerDescription;
+        
+        [SerializeField, TextArea(5, 10)] private string developerDescription;
         [NonSerialized] private List<T> items = new List<T>();
 
         public void AddItem(T item) {
