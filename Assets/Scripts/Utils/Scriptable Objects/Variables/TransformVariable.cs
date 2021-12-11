@@ -1,6 +1,6 @@
 using UnityEngine;
 
 namespace Utils.ScriptableObjects.Variables {
-    [CreateAssetMenu(menuName = "Utils/Referenceable Variables/Transform")]
+    [CreateAssetMenu(menuName = "Utils/Scriptable Variables/Transform")]
     public class TransformVariable : ScriptableVariable<Transform> { }
 }

@@ -1,16 +1,16 @@
 using UnityEngine;
 using Utils.Common;
-using Utils.ScriptableObjects;
 using Utils.ScriptableObjects.Variables;
 
 namespace Game.Environment {
     public class ForceField : MonoBehaviour {
         [SerializeField] private TransformVariable shipTransform;
         [SerializeField] private FloatVariable shipThrottle;
+        [SerializeField] private RigidbodyVariable shipRigidbody;
         [SerializeField] private float radius = 1000f;
         [SerializeField] private float lookAtThreshold = 0.7f;
 
-        private ReferenceableVariable<float> modifier = new (0.001f);
+        private ReferenceableVariable<float> modifier = new (0f);
 
         private void Update() {
             bool isInside = Vector3.Distance(transform.position, shipTransform.BaseValue.position) < radius;

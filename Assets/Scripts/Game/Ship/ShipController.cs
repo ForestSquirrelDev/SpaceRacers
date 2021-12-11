@@ -13,6 +13,7 @@ namespace Game.Ship {
         [SerializeField] private FloatVariable shipTopSpeed;
         [SerializeField] private FloatVariable shipThrottlePower;
         [SerializeField] private FloatVariable shipNitroBank;
+        [SerializeField] private RigidbodyVariable shipRigidbody;
         [SerializeField] private TransformVariable shipTransform;
 
         private ShipInputProcessor input;
@@ -20,10 +21,14 @@ namespace Game.Ship {
         private NitroBooster nitroBooster;
 
         private void Awake() {
-            input = new ShipInputProcessor(shipConfig, shipThrottle, transform, Camera.main);
-            movement = new ShipMovement(GetComponent<Rigidbody>(), shipConfig, input, shipSpeed, shipTopSpeed, shipThrottlePower);
+            Rigidbody rb = GetComponent<Rigidbody>();
+            Transform t = transform;
+            
+            input = new ShipInputProcessor(shipConfig, shipThrottle, t, Camera.main);
+            movement = new ShipMovement(rb, shipConfig, input, shipSpeed, shipTopSpeed, shipThrottlePower);
             nitroBooster = new NitroBooster(shipThrottlePower, shipConfig, shipNitroBank, input);
-            shipTransform.SetValue(transform, true);
+            shipTransform.SetValue(t, true);
+            shipRigidbody.SetValue(rb);
         }
 
         private void FixedUpdate() {
