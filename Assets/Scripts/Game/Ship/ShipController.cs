@@ -1,26 +1,26 @@
 using Game.Configs;
 using UnityEngine;
-using Utils.ScriptableObjects;
+using Utils.ScriptableObjects.Variables;
 
 namespace Game.Ship {
     public class ShipController : MonoBehaviour {
         [Header("Configs")]
-        [SerializeField] ShipConfig shipConfig;
+        [SerializeField] private ShipConfig shipConfig;
 
         [Header("Scriptable variables")]
-        [SerializeField] FloatVariable shipThrottle;
-        [SerializeField] FloatVariable shipSpeed;
-        [SerializeField] FloatVariable shipTopSpeed;
-        [SerializeField] FloatVariable shipThrottlePower;
-        [SerializeField] FloatVariable shipNitroBank;
-        [SerializeField] TransformVariable shipTransform;
+        [SerializeField] private FloatVariable shipThrottle;
+        [SerializeField] private FloatVariable shipSpeed;
+        [SerializeField] private FloatVariable shipTopSpeed;
+        [SerializeField] private FloatVariable shipThrottlePower;
+        [SerializeField] private FloatVariable shipNitroBank;
+        [SerializeField] private TransformVariable shipTransform;
 
         private ShipInputProcessor input;
         private ShipMovement movement;
         private NitroBooster nitroBooster;
 
         private void Awake() {
-            input = new ShipInputProcessor(shipConfig, shipThrottle, transform);
+            input = new ShipInputProcessor(shipConfig, shipThrottle, transform, Camera.main);
             movement = new ShipMovement(GetComponent<Rigidbody>(), shipConfig, input, shipSpeed, shipTopSpeed, shipThrottlePower);
             nitroBooster = new NitroBooster(shipThrottlePower, shipConfig, shipNitroBank, input);
             shipTransform.SetValue(transform, true);

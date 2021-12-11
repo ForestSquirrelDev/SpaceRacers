@@ -3,15 +3,19 @@ using UnityEngine;
 namespace Game
 {
     public class CameraFollow : MonoBehaviour {
-        [SerializeField] Transform target;
+        [SerializeField] private Transform target;
         [Range(0.01f, 0.5f)]
-        [SerializeField] float cameraHeight = 0.25f;
+        [SerializeField]
+        private float cameraHeight = 0.25f;
         [Range(1.0f, 100.0f)]
-        [SerializeField] float distance = 12.0f;
+        [SerializeField]
+        private float distance = 12.0f;
         [Range(1.0f, 10.0f)]
-        [SerializeField] float rotationSpeed = 3.0f;
+        [SerializeField]
+        private float rotationSpeed = 3.0f;
         [Range(0.01f, 1.0f)]
-        [SerializeField] float smoothTime = 0.2f;
+        [SerializeField]
+        private float smoothTime = 0.2f;
 
         private Vector3 cameraPos;
         private Vector3 velocity;
@@ -25,7 +29,7 @@ namespace Game
             }
         }
 
-        void FixedUpdate() {
+        private void FixedUpdate() {
             FollowPlayer();
         }
 

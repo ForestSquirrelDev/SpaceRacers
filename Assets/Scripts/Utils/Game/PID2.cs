@@ -8,8 +8,8 @@ namespace Utils
 	public class PID2 {
 		public float pFactor, iFactor, dFactor;
 
-		float integral;
-		float lastError;
+		private float integral;
+		private float lastError;
 
 
 		public PID2(float pFactor, float iFactor, float dFactor) {

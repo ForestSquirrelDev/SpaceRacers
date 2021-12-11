@@ -2,15 +2,16 @@ using Game.Configs;
 using UnityEngine;
 using Utils.Common;
 using Utils.ScriptableObjects;
+using Utils.ScriptableObjects.Variables;
 
 namespace Game.Ship {
     public class NitroBooster {
-        FloatVariable throttlePower, nitroBank;
-        ShipConfig config;
-        ShipInputProcessor input;
-        ReferenceableVariable<float> nitro = new ReferenceableVariable<float>(1f);
+        private FloatVariable throttlePower, nitroBank;
+        private ShipConfig config;
+        private ShipInputProcessor input;
+        private ReferenceableVariable<float> nitro = new(1f);
 
-        readonly float maxCapacity;
+        private readonly float maxCapacity;
 
         public NitroBooster(FloatVariable throttlePower, ShipConfig config, FloatVariable nitroBank, ShipInputProcessor input) {
             this.throttlePower = throttlePower;
@@ -18,7 +19,7 @@ namespace Game.Ship {
             this.nitroBank = nitroBank;
             this.input = input;
 
-            this.throttlePower.AddModifier((f1, f2) => (f1 * f2), nitro);
+            this.throttlePower.TryAddModifier((f1, f2) => (f1 * f2), nitro);
             this.nitroBank.SetValue(config.nitroCapacity);
             maxCapacity = config.nitroCapacity;
         }

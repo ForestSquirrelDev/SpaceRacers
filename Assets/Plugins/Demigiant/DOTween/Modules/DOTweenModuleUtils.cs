@@ -25,7 +25,7 @@ namespace DG.Tweening
     /// </summary>
 	public static class DOTweenModuleUtils
     {
-        static bool _initialized;
+        private static bool _initialized;
 
         #region Reflection
 
@@ -55,7 +55,7 @@ namespace DG.Tweening
 #pragma warning disable
         [UnityEngine.Scripting.Preserve]
         // Just used to preserve methods when building, never called
-        static void Preserver()
+        private static void Preserver()
         {
             Assembly[] loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
             MethodInfo mi = typeof(MonoBehaviour).GetMethod("Stub");
@@ -70,7 +70,7 @@ namespace DG.Tweening
 #if UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_5 || UNITY_2017_1
         static void PlaymodeStateChanged()
         #else
-        static void PlaymodeStateChanged(UnityEditor.PlayModeStateChange state)
+        private static void PlaymodeStateChanged(UnityEditor.PlayModeStateChange state)
 #endif
         {
             if (DOTween.instance == null) return;

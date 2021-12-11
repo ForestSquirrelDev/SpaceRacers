@@ -2,14 +2,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils.ScriptableObjects;
+using Utils.ScriptableObjects.Variables;
 
 namespace UI.HUD {
     public class Speedometer : MonoBehaviour {
-        [SerializeField] Image fillable;
-        [SerializeField] FloatVariable shipSpeed, shipTopSpeed;
-        [SerializeField] TMP_Text speedText;
+        [SerializeField] private Image fillable;
+        [SerializeField] private FloatVariable shipSpeed, shipTopSpeed;
+        [SerializeField] private TMP_Text speedText;
 
-        float previousSpeed;
+        private float previousSpeed;
 
         private void Update() {
             float normalizedSpeed = shipSpeed.ModifiedValue() / shipTopSpeed.ModifiedValue();

@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Utils.ScriptableObjects;
+using Utils.ScriptableObjects.Variables;
 
 namespace UI.HUD {
     public class NitroBankDisplayer : MonoBehaviour {
-        [SerializeField] FloatVariable shipNitroBank;
-        [SerializeField] Image fillable;
+        [SerializeField] private FloatVariable shipNitroBank;
+        [SerializeField] private Image fillable;
 
         private float maxNitro;
         private float previousValue;

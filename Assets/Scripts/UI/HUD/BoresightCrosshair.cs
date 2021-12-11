@@ -1,14 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Utils.ScriptableObjects;
+using Utils.ScriptableObjects.Variables;
 
 namespace UI.HUD {
     public class BoresightCrosshair : MonoBehaviour {
-        [SerializeField] Image crosshair;
-        [SerializeField] TransformVariable shipTransform;
-        [SerializeField] float boresightDistance = 2000f;
+        [SerializeField] private Image crosshair;
+        [SerializeField] private TransformVariable shipTransform;
+        [SerializeField] private float boresightDistance = 2000f;
 
-        Camera cam;
+        private Camera cam;
 
         private void Awake() {
             cam = Camera.main;

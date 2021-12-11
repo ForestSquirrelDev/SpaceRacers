@@ -1,6 +1,6 @@
 using Game.Configs;
 using UnityEngine;
-using Utils.ScriptableObjects;
+using Utils.ScriptableObjects.Variables;
 
 namespace Game.Ship {
     public class ShipMovement {

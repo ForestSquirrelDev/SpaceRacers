@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Utils.ScriptableObjects;
+using Utils.ScriptableObjects.Variables;
 
 namespace UI.HUD {
     public class ThrottleSlider : MonoBehaviour {
-        [SerializeField] Slider slider;
-        [SerializeField] FloatVariable shipThrottle;
+        [SerializeField] private Slider slider;
+        [SerializeField] private FloatVariable shipThrottle;
 
         private bool invokeCallback = true;
 

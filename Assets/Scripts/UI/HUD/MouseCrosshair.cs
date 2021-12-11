@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace UI.HUD {
     public class MouseCrosshair : MonoBehaviour {
-        [SerializeField] Image crosshair;
+        [SerializeField] private Image crosshair;
 
         private void Update() {
             crosshair.transform.position = Input.mousePosition;

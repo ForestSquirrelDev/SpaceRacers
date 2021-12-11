@@ -6,6 +6,7 @@ using System;
 using Utils.Maths;
 using Utils.Vectors;
 using Utils.ScriptableObjects;
+using Utils.ScriptableObjects.Variables;
 using static UnityEngine.InputSystem.InputAction;
 
 namespace Game.Ship {
@@ -23,6 +24,7 @@ namespace Game.Ship {
         private FloatVariable shipThrottle;
         private ShipConfig config;
         private Transform transform;
+        private Camera mainCamera;
 
         private Mouse mouse;
         private ShipInputActions shipInputActions;
@@ -30,10 +32,11 @@ namespace Game.Ship {
         private InputAction rotationAction;
         private InputAction nitroAction;
 
-        public ShipInputProcessor(ShipConfig config, FloatVariable shipThrottle, Transform transform) {
+        public ShipInputProcessor(ShipConfig config, FloatVariable shipThrottle, Transform transform, Camera camera) {
             this.config = config;
             this.shipThrottle = shipThrottle;
             this.transform = transform;
+            this.mainCamera = camera;
 
             mouse = Mouse.current;
             shipInputActions = new ShipInputActions();
@@ -87,7 +90,7 @@ namespace Game.Ship {
         private void FindMousePosition(out Vector3 gotoPos) {
             Vector2 mouseInput = mouse.position.ReadValue();
             Vector3 mousePos = new Vector3(mouseInput.x, mouseInput.y, 1000f);
-            gotoPos = Camera.main.ScreenToWorldPoint(mousePos);
+            gotoPos = mainCamera.ScreenToWorldPoint(mousePos);
 
             var inputY = (mouseInput.y - (Screen.height * 0.5f)) / (Screen.height * 0.5f);
             var inputX = (mouseInput.x - (Screen.width * 0.5f)) / (Screen.width * 0.5f);
