@@ -20,7 +20,7 @@ namespace Game.Environment {
             float dot = Vector3.Dot(offset.normalized, shipTransform.BaseValue.forward);
             bool looksAtCenter = dot >= lookAtThreshold;
             if (looksAtCenter) {
-                shipThrottle.TryRemoveModifierGradually(modifier, 1f, 3f);
+                _ = shipThrottle.TryRemoveModifierGraduallyAsync(modifier, 1f, 3f);
             }
             else {
                 shipThrottle.TryAddModifier((f1, f2) => f1 * f2, modifier);

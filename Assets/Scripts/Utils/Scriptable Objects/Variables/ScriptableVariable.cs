@@ -36,7 +36,5 @@ namespace Utils.ScriptableObjects.Variables {
             if (modifiers.ContainsKey(modifier))
                 modifiers.Remove(modifier);
         }
-
-        public virtual void TryRemoveModifierGradually(ReferenceableVariable<T> modifier, T targetValue, float removeTime) { }
     }
 }
