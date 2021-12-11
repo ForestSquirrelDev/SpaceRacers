@@ -4,7 +4,6 @@
 [Bb]uild/
 [Bb]uilds/
 Logs/
-.idea/
 Assets/AssetStoreTools*
 
 # Visual Studio cache directory
@@ -32,3 +31,6 @@ sysinfo.txt
 
 # Builds
 *.apk
+
+#Rider
+.idea/
