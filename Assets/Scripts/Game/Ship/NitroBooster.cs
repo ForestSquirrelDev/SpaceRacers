@@ -1,7 +1,6 @@
 using Game.Configs;
 using UnityEngine;
 using Utils.Common;
-using Utils.ScriptableObjects;
 using Utils.ScriptableObjects.Variables;
 
 namespace Game.Ship {

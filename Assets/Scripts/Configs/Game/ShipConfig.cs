@@ -1,8 +1,19 @@
 using UnityEngine;
+using UnityEngine.Serialization;
+using Utils.ScriptableObjects.Variables;
 
 namespace Game.Configs {
     [CreateAssetMenu(menuName = "Configs/Game/Ship Config")]
     public class ShipConfig : ScriptableObject {
+         [Header("Scriptable variables")] 
+        [FormerlySerializedAs("shipThrottle")] public FloatVariable shipInputThrottle;
+        public FloatVariable shipSpeed;
+        public FloatVariable shipTopSpeed;
+        public FloatVariable shipThrottlePower;
+        public FloatVariable shipNitroBank;
+        public RigidbodyVariable shipRigidbody;
+        public TransformVariable shipTransform;
+        
         [Header("Movement parameters")]
         public float throttlePower = 5000f;
         public float strafeSpeed = 100f;
@@ -21,11 +32,5 @@ namespace Game.Configs {
         public float nitroPower = 1.5f;
         public float nitroSensitivity = 3f;
         public float nitroCapacity = 10f;
-        public float nitroRechargeSpeed = 1f;
-
-        [Header("PID Input")]
-        public float rollKp = 1f;
-        public float rollKi = 0;
-        public float rollKd = 0.1f;
     }
 }

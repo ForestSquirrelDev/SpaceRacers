@@ -1,21 +1,11 @@
 using Game.Configs;
 using UnityEngine;
-using Utils.ScriptableObjects.Variables;
 
 namespace Game.Ship {
     public class ShipController : MonoBehaviour {
         [Header("Configs")]
-        [SerializeField] private ShipConfig shipConfig;
-
-        [Header("Scriptable variables")]
-        [SerializeField] private FloatVariable shipThrottle;
-        [SerializeField] private FloatVariable shipSpeed;
-        [SerializeField] private FloatVariable shipTopSpeed;
-        [SerializeField] private FloatVariable shipThrottlePower;
-        [SerializeField] private FloatVariable shipNitroBank;
-        [SerializeField] private RigidbodyVariable shipRigidbody;
-        [SerializeField] private TransformVariable shipTransform;
-
+        [SerializeField] private ShipConfig config;
+        
         private ShipInputProcessor input;
         private ShipMovement movement;
         private NitroBooster nitroBooster;
@@ -24,11 +14,12 @@ namespace Game.Ship {
             Rigidbody rb = GetComponent<Rigidbody>();
             Transform t = transform;
             
-            input = new ShipInputProcessor(shipConfig, shipThrottle, t, Camera.main);
-            movement = new ShipMovement(rb, shipConfig, input, shipSpeed, shipTopSpeed, shipThrottlePower);
-            nitroBooster = new NitroBooster(shipThrottlePower, shipConfig, shipNitroBank, input);
-            shipTransform.SetValue(t, true);
-            shipRigidbody.SetValue(rb);
+            input = new ShipInputProcessor(config, config.shipInputThrottle, t, Camera.main);
+            movement = new ShipMovement(rb, config, input, config.shipSpeed,
+                config.shipTopSpeed, config.shipThrottlePower);
+            nitroBooster = new NitroBooster(config.shipThrottlePower, config, config.shipNitroBank, input);
+            config.shipTransform.SetValue(t, true);
+            config.shipRigidbody.SetValue(rb);
         }
 
         private void FixedUpdate() {

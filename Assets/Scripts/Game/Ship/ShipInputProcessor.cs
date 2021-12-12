@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
-using Game.Configs;
 using System;
+using Game.Configs;
 using Utils.Maths;
 using Utils.Vectors;
-using Utils.ScriptableObjects;
 using Utils.ScriptableObjects.Variables;
 using static UnityEngine.InputSystem.InputAction;
 

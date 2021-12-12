@@ -9,15 +9,16 @@ namespace Game.Race {
         [SerializeField] private StargatesRuntimeSet allStargates;
 
         private void OnEnable() {
-            allStargates.AddItem(this);
+            allStargates.AddItem(this, true);
         }
 
         private void OnTriggerEnter(Collider other) {
             if (!allStargates.Items.Contains(this)) return;
-            if (other.TryGetComponent(out ShipController ship)) {
-                ShipEntered?.Invoke(this);
-                allStargates.RemoveItem(this);
-            }
+            ShipController ship = other.GetComponentInParent<ShipController>();
+            if (ship == null) return;
+            Debug.Log("Ship entered");
+            ShipEntered?.Invoke(this);
+            allStargates.RemoveItem(this, true);
         }
 
         private void OnDisable() {

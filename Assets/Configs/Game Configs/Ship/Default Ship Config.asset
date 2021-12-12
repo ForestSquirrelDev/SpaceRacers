@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7997798e7f4f29042baa3397c9c5e9cd, type: 3}
   m_Name: Default Ship Config
   m_EditorClassIdentifier: 
+  shipInputThrottle: {fileID: 11400000, guid: ca5f450dd59ede74d9c46334ff16989e, type: 2}
+  shipSpeed: {fileID: 11400000, guid: 545c6dc6edab1434bb45b8e367dd74d5, type: 2}
+  shipTopSpeed: {fileID: 11400000, guid: 150ecd6b2a0cd66439a9c64a1018b92e, type: 2}
+  shipThrottlePower: {fileID: 11400000, guid: 7f6c1ac72c886f04c992f2e8094898fc, type: 2}
+  shipNitroBank: {fileID: 11400000, guid: f0e0e1233d88c2a48b765fd6d64dbffd, type: 2}
+  shipRigidbody: {fileID: 11400000, guid: 10c1018e83f4d524a8d693d150024973, type: 2}
+  shipTransform: {fileID: 11400000, guid: 651930ab210896241bab8ecb1919535d, type: 2}
   throttlePower: 5000
   strafeSpeed: 500
   angularSpeed: 500
@@ -25,7 +32,3 @@ MonoBehaviour:
   nitroPower: 1.5
   nitroSensitivity: 3
   nitroCapacity: 5
-  nitroRechargeSpeed: 1
-  rollKp: 1
-  rollKi: 0.2
-  rollKd: 0.1
