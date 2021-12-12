@@ -32,5 +32,14 @@ namespace Game.Configs {
         public float nitroPower = 1.5f;
         public float nitroSensitivity = 3f;
         public float nitroCapacity = 10f;
+
+        [Header("PID input")]
+        public float pitchYawKp = 0.2f;
+        public float pitchYawKi = 0.2f;
+        public float pitchYawKd = 0.2f;
+        [Space(5f)]
+        public float rollKp = 1f;
+        public float rollKi = 0.2f;
+        public float rollKd = 0.2f;
     }
 }

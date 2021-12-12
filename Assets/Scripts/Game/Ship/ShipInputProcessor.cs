@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using DG.Tweening;
 using System;
 using Game.Configs;
+using Utils.Game;
 using Utils.Maths;
 using Utils.Vectors;
 using Utils.ScriptableObjects.Variables;
@@ -19,6 +20,9 @@ namespace Game.Ship {
         public bool NitroRequired { get; private set; }
 
         private Vector2 mouseInput;
+        private PID pitchPID = new PID();
+        private PID yawPID = new PID();
+        private PID rollPID = new PID();
 
         private FloatVariable shipThrottle;
         private ShipConfig config;
@@ -90,7 +94,7 @@ namespace Game.Ship {
             Vector2 mouseInput = mouse.position.ReadValue();
             Vector3 mousePos = new Vector3(mouseInput.x, mouseInput.y, 1000f);
             gotoPos = mainCamera.ScreenToWorldPoint(mousePos);
-
+            
             var inputY = (mouseInput.y - (Screen.height * 0.5f)) / (Screen.height * 0.5f);
             var inputX = (mouseInput.x - (Screen.width * 0.5f)) / (Screen.width * 0.5f);
 
@@ -99,9 +103,12 @@ namespace Game.Ship {
 
         private void CalculateTurn(Vector3 gotoPos) {
             Vector3 localGotoPos = transform.InverseTransformVector(gotoPos - transform.position).normalized;
-                
+            float dt = Time.deltaTime;
+            
             Pitch = Mathf.Clamp(localGotoPos.x * config.pitchSensitivity, -config.pitchSensitivity, config.pitchSensitivity);
+            Pitch = pitchPID.GetOutput(config.pitchYawKp, config.pitchYawKi, config.pitchYawKd, Pitch, dt);
             Yaw = Mathf.Clamp(-localGotoPos.y * config.yawSensitivity, -config.yawSensitivity, config.yawSensitivity);
+            Yaw = yawPID.GetOutput(config.pitchYawKp, config.pitchYawKi, config.pitchYawKd, Yaw, dt);
         }
 
         private void CalculateRoll(float deltaTime) {
@@ -113,7 +120,7 @@ namespace Game.Ship {
             rollInfluence *= config.autoRollSensitivity;
 
             if (inputRotation != 0) Roll = inputRotation * config.customRollSensitivity;
-            else Roll = Mathf.MoveTowards(Roll, rollInfluence, deltaTime * 1f);
+            else Roll = rollPID.GetOutput(config.rollKp, config.rollKi, config.rollKd, rollInfluence, deltaTime);
         }
 
         private void OnSliderThrottleChanged(float value) {
