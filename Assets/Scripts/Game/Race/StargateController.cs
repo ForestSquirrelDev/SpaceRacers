@@ -16,7 +16,6 @@ namespace Game.Race {
             if (!allStargates.Items.Contains(this)) return;
             ShipController ship = other.GetComponentInParent<ShipController>();
             if (ship == null) return;
-            Debug.Log("Ship entered");
             ShipEntered?.Invoke(this);
             allStargates.RemoveItem(this, true);
         }

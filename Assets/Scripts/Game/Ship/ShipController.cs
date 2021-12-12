@@ -9,7 +9,7 @@ namespace Game.Ship {
         private ShipInputProcessor input;
         private ShipMovement movement;
         private NitroBooster nitroBooster;
-
+        
         private void Awake() {
             Rigidbody rb = GetComponent<Rigidbody>();
             Transform t = transform;

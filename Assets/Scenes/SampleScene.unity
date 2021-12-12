@@ -1005,7 +1005,7 @@ MonoBehaviour:
   shipThrottle: {fileID: 11400000, guid: 7f6c1ac72c886f04c992f2e8094898fc, type: 2}
   shipRigidbody: {fileID: 11400000, guid: 10c1018e83f4d524a8d693d150024973, type: 2}
   radius: 2000
-  lookAtThreshold: 0.7
+  lookAtThreshold: 0.1
 --- !u!1 &608238687
 GameObject:
   m_ObjectHideFlags: 0

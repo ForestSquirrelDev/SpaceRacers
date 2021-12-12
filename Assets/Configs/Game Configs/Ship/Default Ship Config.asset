@@ -25,10 +25,16 @@ MonoBehaviour:
   pitchSensitivity: 3
   yawSensitivity: 4
   customRollSensitivity: 1
-  autoRollSensitivity: 0.05
+  autoRollSensitivity: 0.3
   throttleSensitivity: 0.5
   strafeSensitivity: 0.5
   rorationSensitivity: 0.5
   nitroPower: 1.5
   nitroSensitivity: 3
   nitroCapacity: 5
+  pitchYawKp: 1
+  pitchYawKi: 1
+  pitchYawKd: 0.05
+  rollKp: 1
+  rollKi: 0
+  rollKd: 0.1
