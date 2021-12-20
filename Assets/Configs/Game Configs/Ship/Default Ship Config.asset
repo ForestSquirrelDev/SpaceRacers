@@ -32,9 +32,9 @@ MonoBehaviour:
   nitroPower: 1.5
   nitroSensitivity: 3
   nitroCapacity: 5
-  pitchYawKp: 1
-  pitchYawKi: 1
-  pitchYawKd: 0.05
+  pitchYawKp: 1.4
+  pitchYawKi: 0.3
+  pitchYawKd: 0.08
   rollKp: 1
   rollKi: 0
   rollKd: 0.1

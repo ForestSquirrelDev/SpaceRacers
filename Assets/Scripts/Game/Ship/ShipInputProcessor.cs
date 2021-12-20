@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
 using System;
-using Game.Configs;
+using Configs.Game.Ship;
 using Utils.Game;
 using Utils.Maths;
 using Utils.Vectors;
@@ -107,6 +107,7 @@ namespace Game.Ship {
             
             Pitch = Mathf.Clamp(localGotoPos.x * config.pitchSensitivity, -config.pitchSensitivity, config.pitchSensitivity);
             Pitch = pitchPID.GetOutput(config.pitchYawKp, config.pitchYawKi, config.pitchYawKd, Pitch, dt);
+            
             Yaw = Mathf.Clamp(-localGotoPos.y * config.yawSensitivity, -config.yawSensitivity, config.yawSensitivity);
             Yaw = yawPID.GetOutput(config.pitchYawKp, config.pitchYawKi, config.pitchYawKd, Yaw, dt);
         }

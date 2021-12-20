@@ -9,7 +9,7 @@ Shader "Custom/SampleSurfaceShader"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags{"RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" "UniversalMaterialType" = "Lit" "IgnoreProjector" = "True" "ShaderModel"="4.5"}
         LOD 200
 
         CGPROGRAM
@@ -24,7 +24,7 @@ Shader "Custom/SampleSurfaceShader"
 
         struct Input
         {
-            //float2 uv_MainTex;
+            float2 uv_MainTex;
             float4 color : COLOR;
         };
 
@@ -43,7 +43,9 @@ Shader "Custom/SampleSurfaceShader"
         {
             // Albedo comes from a texture tinted by color
             //fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
+            IN.color.w = 0.1f;
             o.Albedo = 1;
+            o.Alpha = IN.color.w;
             // Metallic and smoothness come from slider variables
             //o.Alpha = c.a;
         }

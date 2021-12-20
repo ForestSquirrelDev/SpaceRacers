@@ -1,4 +1,4 @@
-using Game.Configs;
+using Configs.Game.Ship;
 using UnityEngine;
 using Utils.ScriptableObjects.Variables;
 
@@ -24,12 +24,12 @@ namespace Game.Ship {
 
         public void FixedUpdate(float fixedDeltaTime) {
             rb.AddRelativeForce(
-                x: input.Strafe * config.strafeSpeed,
-                y: 0f,
-                z: input.Throttle * throttlePower.ModifiedValue(),
-                mode: ForceMode.Force);
+                input.Strafe * config.strafeSpeed,
+                0f,
+                input.Throttle * throttlePower.ModifiedValue(),
+                ForceMode.Force);
             rb.AddRelativeTorque(new Vector3(input.Yaw, input.Pitch, input.Roll) * config.angularSpeed);
-            speed.SetValue(rb.velocity.magnitude, false);
+            speed.SetValue(rb.velocity.magnitude);
         }
     }
 }

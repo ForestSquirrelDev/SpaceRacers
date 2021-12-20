@@ -1,11 +1,12 @@
-using Game.Configs;
+using System;
+using Cinemachine;
+using Configs.Game.Ship;
 using UnityEngine;
 
 namespace Game.Ship {
     public class ShipController : MonoBehaviour {
-        [Header("Configs")]
         [SerializeField] private ShipConfig config;
-        
+
         private ShipInputProcessor input;
         private ShipMovement movement;
         private NitroBooster nitroBooster;
