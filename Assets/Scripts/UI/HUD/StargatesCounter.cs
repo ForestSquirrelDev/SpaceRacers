@@ -1,8 +1,8 @@
 using System;
 using System.Globalization;
-using Configs.UI;
 using Game.Race;
 using TMPro;
+using UI.Configs;
 using UnityEngine;
 using Utils;
 

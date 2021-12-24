@@ -19,6 +19,7 @@ MonoBehaviour:
   shipNitroBank: {fileID: 11400000, guid: f0e0e1233d88c2a48b765fd6d64dbffd, type: 2}
   shipRigidbody: {fileID: 11400000, guid: 10c1018e83f4d524a8d693d150024973, type: 2}
   shipTransform: {fileID: 11400000, guid: 651930ab210896241bab8ecb1919535d, type: 2}
+  targetableVariable: {fileID: 11400000, guid: 872e94309db593048af0e6669fad4751, type: 2}
   throttlePower: 5000
   strafeSpeed: 500
   angularSpeed: 500
@@ -34,7 +35,7 @@ MonoBehaviour:
   nitroCapacity: 5
   pitchYawKp: 1.4
   pitchYawKi: 0.3
-  pitchYawKd: 0.08
+  pitchYawKd: 0.1
   rollKp: 1
   rollKi: 0
   rollKd: 0.1

@@ -1,6 +1,5 @@
-using System;
-using Cinemachine;
-using Configs.Game.Ship;
+using Game.Configs.Ship;
+using Game.Shooting;
 using UnityEngine;
 
 namespace Game.Ship {
@@ -10,21 +9,25 @@ namespace Game.Ship {
         private ShipInputProcessor input;
         private ShipMovement movement;
         private NitroBooster nitroBooster;
+        private TargetingSystem targetingSystem;
         
         private void Awake() {
             Rigidbody rb = GetComponent<Rigidbody>();
             Transform t = transform;
-            
-            input = new ShipInputProcessor(config, config.shipInputThrottle, t, Camera.main);
+            Camera cam = Camera.main;
+
+            input = new ShipInputProcessor(config, config.shipInputThrottle, t, cam);
             movement = new ShipMovement(rb, config, input, config.shipSpeed,
                 config.shipTopSpeed, config.shipThrottlePower);
             nitroBooster = new NitroBooster(config.shipThrottlePower, config, config.shipNitroBank, input);
+            targetingSystem = new TargetingSystem(cam, t, input, config.targetableVariable);
             config.shipTransform.SetValue(t, true);
             config.shipRigidbody.SetValue(rb);
         }
 
         private void FixedUpdate() {
             movement.FixedUpdate(Time.fixedDeltaTime);
+            targetingSystem.FixedUpdate();
         }
 
         private void Update() {

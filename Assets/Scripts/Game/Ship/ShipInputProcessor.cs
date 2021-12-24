@@ -2,8 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
 using System;
-using Configs.Game.Ship;
-using Utils.Game;
+using Game.Configs.Ship;
 using Utils.Maths;
 using Utils.Vectors;
 using Utils.ScriptableObjects.Variables;
@@ -18,11 +17,12 @@ namespace Game.Ship {
         public float Pitch { get; private set; }
         public float Yaw { get; private set; }
         public bool NitroRequired { get; private set; }
+        public Vector3 MouseInputRaw { get; private set; }
 
-        private Vector2 mouseInput;
         private PID pitchPID = new PID();
         private PID yawPID = new PID();
         private PID rollPID = new PID();
+        private Vector2 MouseInputClamped;
 
         private FloatVariable shipThrottle;
         private ShipConfig config;
@@ -92,13 +92,14 @@ namespace Game.Ship {
 
         private void FindMousePosition(out Vector3 gotoPos) {
             Vector2 mouseInput = mouse.position.ReadValue();
+            MouseInputRaw = mouseInput;
             Vector3 mousePos = new Vector3(mouseInput.x, mouseInput.y, 1000f);
             gotoPos = mainCamera.ScreenToWorldPoint(mousePos);
             
             var inputY = (mouseInput.y - (Screen.height * 0.5f)) / (Screen.height * 0.5f);
             var inputX = (mouseInput.x - (Screen.width * 0.5f)) / (Screen.width * 0.5f);
 
-            this.mouseInput = new Vector2(inputX, inputY).ClampNeg1To1();
+            this.MouseInputClamped = new Vector2(inputX, inputY).ClampNeg1To1();
         }
 
         private void CalculateTurn(Vector3 gotoPos) {
@@ -114,8 +115,8 @@ namespace Game.Ship {
 
         private void CalculateRoll(float deltaTime) {
             float inputRotation = Input.GetAxis("Roll");
-            float rollInfluence = -mouseInput.x * Throttle;
-            float yInfluence = MathfExtensions.InverseRelationship(3f, mouseInput.y * 10f);
+            float rollInfluence = -MouseInputClamped.x * Throttle;
+            float yInfluence = MathfExtensions.InverseRelationship(3f, MouseInputClamped.y * 10f);
             yInfluence = Mathf.Clamp(Mathf.Abs(yInfluence), float.MinValue, 1f);
             rollInfluence *= yInfluence;
             rollInfluence *= config.autoRollSensitivity;

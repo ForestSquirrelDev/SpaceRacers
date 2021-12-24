@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Configs.Game.Race;
 using DG.Tweening;
+using Game.Configs.Race;
 using UnityEngine;
 using Utils;
 

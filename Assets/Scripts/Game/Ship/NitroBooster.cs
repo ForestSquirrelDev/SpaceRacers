@@ -1,4 +1,4 @@
-using Configs.Game.Ship;
+using Game.Configs.Ship;
 using UnityEngine;
 using Utils.Common;
 using Utils.ScriptableObjects.Variables;
