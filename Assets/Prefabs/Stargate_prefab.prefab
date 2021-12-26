@@ -421,7 +421,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4819145141448702916}
   m_Layer: 0
-  m_Name: Stargate
+  m_Name: Stargate_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

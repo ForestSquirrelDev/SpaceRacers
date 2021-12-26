@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 2520636142950657680}
   - component: {fileID: 8182075710981770518}
   m_Layer: 0
-  m_Name: LaserProjectile
+  m_Name: LaserBeam_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

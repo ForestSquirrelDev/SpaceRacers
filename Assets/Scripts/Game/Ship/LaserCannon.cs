@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Game.Configs.Ship;
+using Game.Configs.Shooting;
 using Game.Ship.PlayerInput;
 using Game.Shooting;
 using UnityEngine;
@@ -13,19 +14,22 @@ namespace Game.Ship {
         private ShipShootingInputProcessor shootingInput;
         private TargetableVariable currentTarget;
         private FloatVariable shipSpeed;
-        private GameObject laserPrefab;
+        private LaserBeamsPool lasersPool;
+        private LaserBeamConfig laserBeamConfig;
         private List<TransformVariable> guns = new();
 
         private float projectileSpeed;
          
-        public LaserCannon((TransformVariable, TransformVariable) guns, ShipShootingInputProcessor shootingInput, GameObject laserPrefab,
-            TargetableVariable currentTarget, FloatVariable shipSpeed, ShipConfig config) {
+        public LaserCannon((TransformVariable, TransformVariable) guns, 
+            ShipShootingInputProcessor shootingInput, LaserBeamConfig laserBeamConfig,
+            TargetableVariable currentTarget, FloatVariable shipSpeed, ShipConfig config, LaserBeamsPool lasersPool) {
             this.shootingInput = shootingInput;
-            this.laserPrefab = laserPrefab;
             this.guns.Add(guns.Item1);
             this.guns.Add(guns.Item2);
             this.currentTarget = currentTarget;
             this.shipSpeed = shipSpeed;
+            this.lasersPool = lasersPool;
+            this.laserBeamConfig = laserBeamConfig;
             this.projectileSpeed = config.projectileSpeed;
 
             shootingInput.FireRequired += OnFireRequired;
@@ -41,11 +45,12 @@ namespace Game.Ship {
                     Debug.LogError("Gun transform variable is null.");
                     return;
                 }
-                var laser = Object.Instantiate(laserPrefab, gun.BaseValue.position, Quaternion.identity)
-                    .GetComponent<LaserBeam>();
-                laser.Init(currentTarget.BaseValue);
+                GameObject laser = lasersPool.GetObject();
+                laser.transform.position = gun.BaseValue.position;
+                LaserBeam laserMonobehaviour = lasersPool.GetLaserMonobehaviour(laser);
+                laserMonobehaviour.Init(currentTarget.BaseValue, laserBeamConfig);
                 Vector3 direction = gun.BaseValue.transform.forward;
-                laser.Rigidbody.AddForce(direction * ( projectileSpeed + 
+                laserMonobehaviour.Rigidbody.AddForce(direction * ( projectileSpeed + 
                                                        shipSpeed.ModifiedValue().ClampPos1ToMaxValue()), ForceMode.Impulse);
                 laser.transform.rotation = gun.BaseValue.rotation;
             }

@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 3983059164941605068}
   - component: {fileID: 3983059164941605075}
   m_Layer: 0
-  m_Name: StarSparrow3
+  m_Name: StarSparrow3_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -26,8 +26,9 @@ namespace Game.Ship {
                 config.shipTopSpeed, config.shipThrottlePower);
             nitroBooster = new NitroBooster(config.shipThrottlePower, config, config.shipNitroBank, movementInput);
             targetingSystem = new TargetingSystem(cam, t, movementInput, config.targetableVariable);
-            laserCannon = new LaserCannon((config.gunOne, config.gunTwo), shootingInput, config.laserPrefab, config.targetableVariable,
-                config.shipSpeed, config);
+            laserCannon = new LaserCannon((config.gunOne, config.gunTwo),
+                shootingInput, config.laserBeamConfig, config.targetableVariable,
+                config.shipSpeed, config, config.lasersPool);
             
             config.shipTransform.SetValue(t, true);
             config.shipRigidbody.SetValue(rb);

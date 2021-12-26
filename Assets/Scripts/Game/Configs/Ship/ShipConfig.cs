@@ -1,3 +1,4 @@
+using Game.Configs.Shooting;
 using Game.Shooting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -17,8 +18,11 @@ namespace Game.Configs.Ship {
         public TargetableVariable targetableVariable;
         public TransformVariable gunOne, gunTwo;
 
-        [FormerlySerializedAs("projectile")] [Header("Prefabs")]
-        public GameObject laserPrefab;
+        [Header("Dependency configs")]
+        public LaserBeamConfig laserBeamConfig;
+        
+        [Header("Pools")]
+        public LaserBeamsPool lasersPool;
 
         [Header("Movement parameters")]
         public float throttlePower = 5000f;

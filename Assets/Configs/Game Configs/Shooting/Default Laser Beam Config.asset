@@ -9,7 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d8b804f4a2534a42b00eb5e85cfddfe, type: 3}
-  m_Name: Cubes Pool
+  m_Script: {fileID: 11500000, guid: 8a8af0d792dbd7642bf5739ade83d360, type: 3}
+  m_Name: Default Laser Beam Config
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2878977054562813000, guid: 95bdd55380539c64481ebe664f22da37, type: 3}
+  accelerationSpeed: 50
+  rotationSpeed: 5
+  disablingDistance: 5000
+  onEnableYieldTime: 0.5

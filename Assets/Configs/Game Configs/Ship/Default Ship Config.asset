@@ -22,11 +22,12 @@ MonoBehaviour:
   targetableVariable: {fileID: 11400000, guid: 872e94309db593048af0e6669fad4751, type: 2}
   gunOne: {fileID: 11400000, guid: 8e6793c306156b741af215f38073d81d, type: 2}
   gunTwo: {fileID: 11400000, guid: 55458c82671fb6244bd4bdd8cf6b7aa1, type: 2}
-  laserPrefab: {fileID: 8033325580105229912, guid: 0c849ef7faa375f4eb495c3a39041d62, type: 3}
+  laserBeamConfig: {fileID: 11400000, guid: 273ddca9a503f594cb978e16fbe95942, type: 2}
+  lasersPool: {fileID: 11400000, guid: 7eda9fa29c01cc0449a45b3f756c414c, type: 2}
   throttlePower: 5000
   strafeSpeed: 2000
   angularSpeed: 500
-  projectileSpeed: 100
+  projectileSpeed: 200
   pitchSensitivity: 3
   yawSensitivity: 4
   customRollSensitivity: 1
