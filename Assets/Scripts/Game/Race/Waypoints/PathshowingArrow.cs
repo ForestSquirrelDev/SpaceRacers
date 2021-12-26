@@ -3,6 +3,7 @@ using DG.Tweening;
 using Game.Configs.Race;
 using UnityEngine;
 using Utils;
+using Utils.Maths;
 
 namespace Game.Race {
     public class PathshowingArrow : MonoBehaviour {
@@ -23,10 +24,8 @@ namespace Game.Race {
         }
 
         private void Update() {
-            Quaternion targetRotation = Quaternion.LookRotation(
-                currentStargate.transform.position - transform.position);
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation, targetRotation, config.rotationSpeed * Time.deltaTime);
+            transform.rotation = QuaternionExtensions.SmoothRotateTowardsTarget(
+                transform, currentStargate.transform, config.rotationSpeed, Time.deltaTime);
         }
         
         private void OnStargatesCollectionChanged(RuntimeSetChangeType changeType) {

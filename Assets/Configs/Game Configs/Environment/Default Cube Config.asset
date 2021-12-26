@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83a80be7f98b95f408aea598bd613f2a, type: 3}
+  m_Name: Default Cube Config
+  m_EditorClassIdentifier: 
+  cubePrefab: {fileID: 2878977054562813000, guid: 95bdd55380539c64481ebe664f22da37, type: 3}
+  onDestroyCubesCountRange: {x: 5, y: 15}
+  childCubeScaleMultiplierRange: {x: 0.1, y: 0.3}
+  explosionForceRange: {x: 50, y: 100}
+  appliedTorque: {x: 500, y: 500, z: 500}
+  fadeAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.0072286
+      inSlope: 0.10699627
+      outSlope: 0.10699627
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.10240239
+    - serializedVersion: 3
+      time: 1.2276734
+      value: 0.64441884
+      inSlope: -0.7779813
+      outSlope: -0.7779813
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 2.0050106
+      value: -0.031996142
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

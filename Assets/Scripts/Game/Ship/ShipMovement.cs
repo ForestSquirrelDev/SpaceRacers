@@ -1,4 +1,5 @@
 using Game.Configs.Ship;
+using Game.Ship.PlayerInput;
 using UnityEngine;
 using Utils.ScriptableObjects.Variables;
 
@@ -6,14 +7,14 @@ namespace Game.Ship {
     public class ShipMovement {
         private Rigidbody rb;
         private ShipConfig config;
-        private ShipInputProcessor input;
+        private ShipMovementInputProcessor movementInput;
         private FloatVariable speed, topSpeed, throttlePower;
 
-        public ShipMovement(Rigidbody rb, ShipConfig config, ShipInputProcessor input, 
+        public ShipMovement(Rigidbody rb, ShipConfig config, ShipMovementInputProcessor movementInput, 
             FloatVariable speed, FloatVariable topSpeed, FloatVariable throttlePower) {
             this.rb = rb;
             this.config = config;
-            this.input = input;
+            this.movementInput = movementInput;
             this.topSpeed = topSpeed;
             this.speed = speed;
             this.throttlePower = throttlePower;
@@ -22,13 +23,15 @@ namespace Game.Ship {
             this.throttlePower.SetValue(config.throttlePower, false);
         }
 
-        public void FixedUpdate(float fixedDeltaTime) {
+        public void FixedUpdate() {
             rb.AddRelativeForce(
-                input.Strafe * config.strafeSpeed,
+                movementInput.Strafe * config.strafeSpeed,
                 0f,
-                input.Throttle * throttlePower.ModifiedValue(),
+                movementInput.Throttle * throttlePower.ModifiedValue(),
                 ForceMode.Force);
-            rb.AddRelativeTorque(new Vector3(input.Yaw, input.Pitch, input.Roll) * config.angularSpeed);
+            rb.AddRelativeTorque(new Vector3(movementInput.Yaw, 
+                movementInput.Pitch, 
+                movementInput.Roll) * config.angularSpeed);
             speed.SetValue(rb.velocity.magnitude);
         }
     }

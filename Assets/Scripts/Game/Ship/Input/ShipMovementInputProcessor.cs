@@ -8,8 +8,8 @@ using Utils.Vectors;
 using Utils.ScriptableObjects.Variables;
 using static UnityEngine.InputSystem.InputAction;
 
-namespace Game.Ship {
-    public class ShipInputProcessor : IDisposable {
+namespace Game.Ship.PlayerInput {
+    public class ShipMovementInputProcessor : IDisposable {
         public float Throttle { get; private set; }
         public float Strafe { get; private set; }
         public float Rotation { get; private set; }
@@ -30,19 +30,18 @@ namespace Game.Ship {
         private Camera mainCamera;
 
         private Mouse mouse;
-        private ShipInputActions shipInputActions;
         private InputAction strafeAction;
         private InputAction rotationAction;
         private InputAction nitroAction;
 
-        public ShipInputProcessor(ShipConfig config, FloatVariable shipThrottle, Transform transform, Camera camera) {
+        public ShipMovementInputProcessor(ShipConfig config, FloatVariable shipThrottle, Transform transform, Camera camera) {
             this.config = config;
             this.shipThrottle = shipThrottle;
             this.transform = transform;
             this.mainCamera = camera;
 
             mouse = Mouse.current;
-            shipInputActions = new ShipInputActions();
+            var shipInputActions = new ShipInputActions();
             strafeAction = shipInputActions.Ship.StrafeAxis;
             rotationAction = shipInputActions.Ship.RotationAxis;
             nitroAction = shipInputActions.Ship.Nitro;
@@ -70,6 +69,10 @@ namespace Game.Ship {
 
             nitroAction.performed -= SetNitroRequired;
             shipThrottle.OnValueChanged -= OnSliderThrottleChanged;
+            
+            strafeAction.Dispose();
+            rotationAction.Dispose();
+            nitroAction.Dispose();
         }
 
         private void UpdateInputAxes(float deltaTime) {

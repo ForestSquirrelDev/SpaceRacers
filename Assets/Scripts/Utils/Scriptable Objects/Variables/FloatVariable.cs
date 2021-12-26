@@ -5,7 +5,7 @@ using UnityEngine;
 using Utils.Common;
 
 namespace Utils.ScriptableObjects.Variables {
-    [CreateAssetMenu(menuName = "Utils/Scriptable Variables/Float")]
+    [CreateAssetMenu(menuName = "Scriptable Variables/Float Variable")]
     public class FloatVariable : ScriptableVariable<float> {
         [NonSerialized] private bool removalRunning;
         

@@ -1,6 +1,6 @@
 using UnityEngine;
 
 namespace Utils.ScriptableObjects.Variables {
-    [CreateAssetMenu(menuName = "Utils/Scriptable Variables/Rigidbody")]
+    [CreateAssetMenu(menuName = "Scriptable Variables/Rigidbody Variable")]
     public class RigidbodyVariable : ScriptableVariable<Rigidbody> { }
 }

@@ -1,4 +1,5 @@
 using Game.Configs.Ship;
+using Game.Ship.PlayerInput;
 using UnityEngine;
 using Utils.Common;
 using Utils.ScriptableObjects.Variables;
@@ -7,16 +8,16 @@ namespace Game.Ship {
     public class NitroBooster {
         private FloatVariable throttlePower, nitroBank;
         private ShipConfig config;
-        private ShipInputProcessor input;
+        private ShipMovementInputProcessor movementInput;
         private ReferenceableVariable<float> nitro = new(1f);
 
         private readonly float maxCapacity;
 
-        public NitroBooster(FloatVariable throttlePower, ShipConfig config, FloatVariable nitroBank, ShipInputProcessor input) {
+        public NitroBooster(FloatVariable throttlePower, ShipConfig config, FloatVariable nitroBank, ShipMovementInputProcessor movementInput) {
             this.throttlePower = throttlePower;
             this.config = config;
             this.nitroBank = nitroBank;
-            this.input = input;
+            this.movementInput = movementInput;
 
             this.throttlePower.TryAddModifier((f1, f2) => (f1 * f2), nitro);
             this.nitroBank.SetValue(config.nitroCapacity);
@@ -24,7 +25,7 @@ namespace Game.Ship {
         }
 
         public void Update(float deltaTime) {
-            if (input.NitroRequired) {
+            if (movementInput.NitroRequired) {
                 if (nitroBank.ModifiedValue() > 0) {
                     AddNitro(deltaTime);
                     RemoveFromBank(deltaTime);

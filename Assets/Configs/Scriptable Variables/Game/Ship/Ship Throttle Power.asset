@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2469a0dddc67a534484188a23134156b, type: 3}
   m_Name: Ship Throttle Power
   m_EditorClassIdentifier: 
+  developerDescription: Value that's used to multiply input throttle

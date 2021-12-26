@@ -1,6 +1,16 @@
+using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Utils.ScriptableObjects.Variables {
-    [CreateAssetMenu(menuName = "Utils/Scriptable Variables/Transform")]
-    public class TransformVariable : ScriptableVariable<Transform> { }
+    [CreateAssetMenu(menuName = "Scriptable Variables/Transform Variable")]
+
+    public class TransformVariable : ScriptableVariable<Transform> {
+        [CanBeNull] public new Transform BaseValue => value;
+
+        [CanBeNull]
+        public override Transform ModifiedValue() {
+            return base.ModifiedValue();
+        }
+    }
 }

@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using Game.Ship;
+using Game.Ship.PlayerInput;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -9,21 +9,21 @@ namespace Game.Shooting {
         [CanBeNull] private ITargetable CurrentTarget;
         private Camera camera;
         private Transform transform;
-        private ShipInputProcessor input;
+        private ShipMovementInputProcessor movementInput;
         private TargetableVariable targetableVariable;
 
-        private const float threshold = 0.99f;
+        private const float threshold = 0.98f;
 
         public TargetingSystem(Camera mainCamera, Transform transform, 
-            ShipInputProcessor input, TargetableVariable targetableVariable) {
+            ShipMovementInputProcessor movementInput, TargetableVariable targetableVariable) {
             this.camera = mainCamera;
             this.transform = transform;
-            this.input = input;
+            this.movementInput = movementInput;
             this.targetableVariable = targetableVariable;
         }
         
         public void FixedUpdate() {
-            Ray ray = camera.ScreenPointToRay(input.MouseInputRaw);
+            Ray ray = camera.ScreenPointToRay(movementInput.MouseInputRaw);
             if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue)) {
                 ITargetable targetable = hit.collider.gameObject.GetComponent<ITargetable>();
                 if (targetable == null) return;

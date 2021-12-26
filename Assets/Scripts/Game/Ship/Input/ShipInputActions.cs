@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace Game.Ship
+namespace Game.Ship.PlayerInput
 {
     public partial class @ShipInputActions : IInputActionCollection2, IDisposable
     {
@@ -51,6 +51,15 @@ namespace Game.Ship
                     ""name"": ""Nitro"",
                     ""type"": ""Button"",
                     ""id"": ""69e8d34c-becf-4ce9-9a38-dd1fa144736d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""3d0cd0ef-c39e-4c4b-8e68-922f3fdfe373"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -134,6 +143,17 @@ namespace Game.Ship
                     ""action"": ""Nitro"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e2b7d235-c727-48c7-8eca-a4c536dff8a7"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -145,6 +165,7 @@ namespace Game.Ship
             m_Ship_StrafeAxis = m_Ship.FindAction("Strafe Axis", throwIfNotFound: true);
             m_Ship_RotationAxis = m_Ship.FindAction("Rotation Axis", throwIfNotFound: true);
             m_Ship_Nitro = m_Ship.FindAction("Nitro", throwIfNotFound: true);
+            m_Ship_Fire = m_Ship.FindAction("Fire", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -207,6 +228,7 @@ namespace Game.Ship
         private readonly InputAction m_Ship_StrafeAxis;
         private readonly InputAction m_Ship_RotationAxis;
         private readonly InputAction m_Ship_Nitro;
+        private readonly InputAction m_Ship_Fire;
         public struct ShipActions
         {
             private @ShipInputActions m_Wrapper;
@@ -214,6 +236,7 @@ namespace Game.Ship
             public InputAction @StrafeAxis => m_Wrapper.m_Ship_StrafeAxis;
             public InputAction @RotationAxis => m_Wrapper.m_Ship_RotationAxis;
             public InputAction @Nitro => m_Wrapper.m_Ship_Nitro;
+            public InputAction @Fire => m_Wrapper.m_Ship_Fire;
             public InputActionMap Get() { return m_Wrapper.m_Ship; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -232,6 +255,9 @@ namespace Game.Ship
                     @Nitro.started -= m_Wrapper.m_ShipActionsCallbackInterface.OnNitro;
                     @Nitro.performed -= m_Wrapper.m_ShipActionsCallbackInterface.OnNitro;
                     @Nitro.canceled -= m_Wrapper.m_ShipActionsCallbackInterface.OnNitro;
+                    @Fire.started -= m_Wrapper.m_ShipActionsCallbackInterface.OnFire;
+                    @Fire.performed -= m_Wrapper.m_ShipActionsCallbackInterface.OnFire;
+                    @Fire.canceled -= m_Wrapper.m_ShipActionsCallbackInterface.OnFire;
                 }
                 m_Wrapper.m_ShipActionsCallbackInterface = instance;
                 if (instance != null)
@@ -245,6 +271,9 @@ namespace Game.Ship
                     @Nitro.started += instance.OnNitro;
                     @Nitro.performed += instance.OnNitro;
                     @Nitro.canceled += instance.OnNitro;
+                    @Fire.started += instance.OnFire;
+                    @Fire.performed += instance.OnFire;
+                    @Fire.canceled += instance.OnFire;
                 }
             }
         }
@@ -254,6 +283,7 @@ namespace Game.Ship
             void OnStrafeAxis(InputAction.CallbackContext context);
             void OnRotationAxis(InputAction.CallbackContext context);
             void OnNitro(InputAction.CallbackContext context);
+            void OnFire(InputAction.CallbackContext context);
         }
     }
 }

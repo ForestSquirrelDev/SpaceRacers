@@ -1,7 +1,6 @@
 using Game.Shooting;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Utils;
 using Utils.ScriptableObjects.Variables;
 
 namespace Game.Configs.Ship {
@@ -16,11 +15,18 @@ namespace Game.Configs.Ship {
         public RigidbodyVariable shipRigidbody;
         public TransformVariable shipTransform;
         public TargetableVariable targetableVariable;
+        public TransformVariable gunOne, gunTwo;
+
+        [FormerlySerializedAs("projectile")] [Header("Prefabs")]
+        public GameObject laserPrefab;
 
         [Header("Movement parameters")]
         public float throttlePower = 5000f;
         public float strafeSpeed = 100f;
         public float angularSpeed = 100f;
+
+        [Header("Shooting parameters")]
+        public float projectileSpeed = 100f;
 
         [Header("Input parameters")]
         public float pitchSensitivity = 2.5f;

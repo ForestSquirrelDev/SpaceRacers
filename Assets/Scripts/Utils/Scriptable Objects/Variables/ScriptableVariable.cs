@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using Utils.Common;
 
 namespace Utils.ScriptableObjects.Variables {
@@ -11,7 +12,7 @@ namespace Utils.ScriptableObjects.Variables {
         public T BaseValue => value;
 
         [SerializeField, TextArea(5, 10)] private string developerDescription;
-        [NonSerialized] private T value;
+        [NonSerialized] protected T value;
         [NonSerialized] private Dictionary<ReferenceableVariable<T>, Modify> modifiers = new();
 
         public void SetValue(T value, bool invokeCallback = false) {
@@ -19,7 +20,7 @@ namespace Utils.ScriptableObjects.Variables {
             if (invokeCallback) OnValueChanged?.Invoke(this.value);
         }
 
-        public T ModifiedValue() {
+        public virtual T ModifiedValue() {
             T newValue = value;
             foreach (var modifier in modifiers) {
                 newValue = modifier.Value(modifier.Key.Value, newValue);

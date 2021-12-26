@@ -14,16 +14,23 @@ namespace UI.HUD {
 
         private void Update() {
             if (targetable.BaseValue != null) {
+                if (targetable.BaseValue.CantBeTargeted) {
+                    DisableCrosshair();
+                    return;
+                }
                 if (crosshair.gameObject.activeSelf == false)
                     crosshair.gameObject.SetActive(true);
-                Vector3 newPos = cam.WorldToScreenPoint(targetable.BaseValue.Position());
+                Vector3 newPos = cam.WorldToScreenPoint(targetable.BaseValue.GetTransform().position);
                 newPos.z = 0;
                 crosshair.transform.position = newPos;
             }
             else {
-                if (crosshair.gameObject.activeSelf)
-                    crosshair.gameObject.SetActive(false);
+                DisableCrosshair();
             }
+        }
+        private void DisableCrosshair() {
+            if (crosshair.gameObject.activeSelf)
+                crosshair.gameObject.SetActive(false);
         }
     }
 }

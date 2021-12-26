@@ -15,5 +15,9 @@ namespace Utils.Maths
         public static float ClampNeg1To1(this float f) {
             return Mathf.Clamp(f, -1f, 1f);
         }
+
+        public static float ClampPos1ToMaxValue(this float f) {
+            return Mathf.Clamp(f, 1f, float.MaxValue);
+        }
     }
 }

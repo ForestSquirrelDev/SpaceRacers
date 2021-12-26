@@ -20,9 +20,13 @@ MonoBehaviour:
   shipRigidbody: {fileID: 11400000, guid: 10c1018e83f4d524a8d693d150024973, type: 2}
   shipTransform: {fileID: 11400000, guid: 651930ab210896241bab8ecb1919535d, type: 2}
   targetableVariable: {fileID: 11400000, guid: 872e94309db593048af0e6669fad4751, type: 2}
+  gunOne: {fileID: 11400000, guid: 8e6793c306156b741af215f38073d81d, type: 2}
+  gunTwo: {fileID: 11400000, guid: 55458c82671fb6244bd4bdd8cf6b7aa1, type: 2}
+  laserPrefab: {fileID: 8033325580105229912, guid: 0c849ef7faa375f4eb495c3a39041d62, type: 3}
   throttlePower: 5000
-  strafeSpeed: 500
+  strafeSpeed: 2000
   angularSpeed: 500
+  projectileSpeed: 100
   pitchSensitivity: 3
   yawSensitivity: 4
   customRollSensitivity: 1

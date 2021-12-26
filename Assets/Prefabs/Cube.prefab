@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2526725388684943156}
   - component: {fileID: 2915989291599193143}
   - component: {fileID: 1610290939134490981}
+  - component: {fileID: 3298756061907761074}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -63,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 2117638204326cf4db83397b0b9fbbf3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,3 +112,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allTargetables: {fileID: 11400000, guid: 599afc3d65ffece49807be145c7cb65d, type: 2}
+  config: {fileID: 11400000, guid: 89d5443eded441e48b46eb770addc74b, type: 2}
+  fadeAnimatiovCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.0072286
+      inSlope: 0.10699627
+      outSlope: 0.10699627
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.10240239
+    - serializedVersion: 3
+      time: 1.2276734
+      value: 0.64441884
+      inSlope: -0.7779813
+      outSlope: -0.7779813
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 2.0050106
+      value: -0.031996142
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!54 &3298756061907761074
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2878977054562813000}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
