@@ -46,15 +46,15 @@ namespace Game.Environment {
             GetComponent<Collider>().enabled = false;
             Vector3 localScale = thisTransform.localScale;
             for (int i = 0; i < cubesCount; i++) {
-                CubeData cubeData = CreateChildCube(localScale);
-                cubeData.rb.mass *= cubeData.scaleModifier;
-                cubeData.rb.AddTorque(config.appliedTorque.x * cubeData.scaleModifier * Random.value, 
-                    config.appliedTorque.y * cubeData.scaleModifier  * Random.value, 
-                    config.appliedTorque.z * cubeData.scaleModifier * Random.value, 
+                CubesPool.CubeData cubeData = CreateChildCube(localScale, out float scaleModifier);
+                cubeData.rb.mass *= scaleModifier;
+                cubeData.rb.AddTorque(config.appliedTorque.x * scaleModifier * Random.value, 
+                    config.appliedTorque.y * scaleModifier  * Random.value, 
+                    config.appliedTorque.z * scaleModifier * Random.value, 
                     ForceMode.Impulse);
                 cubeData.rb.AddExplosionForce(Random.Range(
-                    config.explosionForceRange.x * cubeData.scaleModifier,
-                    config.explosionForceRange.y * cubeData.scaleModifier),
+                    config.explosionForceRange.x * scaleModifier,
+                    config.explosionForceRange.y * scaleModifier),
                     thisTransform.position, 
                     (localScale.x + localScale.y + localScale.z) / 3);
                 ((ITargetable)cubeData.cubeMonobehaviour).CantBeTargeted = true;
@@ -64,20 +64,14 @@ namespace Game.Environment {
             gameObject.SetActive(false);
         }
         
-        private CubeData CreateChildCube(Vector3 parentLocalScale) {
+        private CubesPool.CubeData CreateChildCube(Vector3 parentLocalScale, out float childScaleModifier) {
             GameObject cube = cubesPool.GetObject();
             cube.transform.position = RandomUtility.RandomPointInsideBox(
                 thisTransform.position, parentLocalScale);
-            float scaleModifier = Random.Range(
+            childScaleModifier = Random.Range(
                 config.childCubeScaleMultiplierRange.x, config.childCubeScaleMultiplierRange.y);
-            cube.transform.localScale = parentLocalScale * scaleModifier;
-            return new CubeData {
-                gameObject = cube,
-                cubeMonobehaviour = cubesPool.GetCubeMonobehaviour(cube),
-                meshRenderer = cube.GetComponent<MeshRenderer>(),
-                rb = cube.GetComponent<Rigidbody>(),
-                scaleModifier = scaleModifier
-            };
+            cube.transform.localScale = parentLocalScale * childScaleModifier;
+            return cubesPool.GetCubeData(cube);
         }
 
         private IEnumerator FadeChildCubeOutRoutine(MeshRenderer meshRenderer, GameObject childCube) {
@@ -93,14 +87,6 @@ namespace Game.Environment {
                 yield return null;
             }
             childCube.SetActive(false);
-        }
-
-        private struct CubeData {
-            public GameObject gameObject;
-            public Cube cubeMonobehaviour;
-            public Rigidbody rb;
-            public MeshRenderer meshRenderer;
-            public float scaleModifier;
         }
     }
 }

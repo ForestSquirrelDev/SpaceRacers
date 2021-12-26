@@ -7,7 +7,7 @@ namespace Game.Environment {
     public class CubesPool : ObjectPool<GameObject> {
         [SerializeField] private GameObject cubePrefab;
         private Transform ParentInScene { get; set; }
-        private Dictionary<GameObject, Cube> monobehavioursPool { get; } = new();
+        private Dictionary<GameObject, CubeData> cubesDataPool { get; } = new();
         
         public override GameObject GetObject() {
             GameObject cube = TryPickExistingObject(out GameObject obj) ? obj : CreateNewObject();
@@ -15,8 +15,8 @@ namespace Game.Environment {
             return cube;
         }
 
-        public Cube GetCubeMonobehaviour(GameObject key) {
-            return monobehavioursPool.TryGetValue(key, out Cube cube) ? cube : null;
+        public CubeData GetCubeData(GameObject key) {
+            return cubesDataPool.GetValueOrDefault(key);
         }
 
         protected override bool TryPickExistingObject(out GameObject obj) {
@@ -32,7 +32,13 @@ namespace Game.Environment {
         protected override GameObject CreateNewObject() {
             GameObject cube = Instantiate(cubePrefab, ParentInScene, true);
             objects.Add(cube);
-            monobehavioursPool.TryAdd(cube, cube.GetComponent<Cube>());
+            CubeData data = new CubeData {
+                gameObject = cube,
+                cubeMonobehaviour = cube.GetComponent<Cube>(),
+                meshRenderer = cube.GetComponent<MeshRenderer>(),
+                rb = cube.GetComponent<Rigidbody>()
+            };
+            cubesDataPool.TryAdd(cube, data);
             SetParent(cube);
             return cube;
         }
@@ -41,6 +47,13 @@ namespace Game.Environment {
             cube.transform.parent = ParentInScene != null
                 ? ParentInScene
                 : ParentInScene = new GameObject("Cubes pool").transform;
+        }
+        
+        public struct CubeData {
+            public GameObject gameObject;
+            public Cube cubeMonobehaviour;
+            public Rigidbody rb;
+            public MeshRenderer meshRenderer;
         }
     }
 }
