@@ -1,10 +1,12 @@
 # SpaceRacers
 
-Small passion project of space racing game. Video for 20-12-2021 prototype state:
+Small passion project of space racing game. Video for 26-12-2021 prototype state:
 
 
 
-https://user-images.githubusercontent.com/82777171/146724110-77c07774-2792-4b92-8b7a-259823a66f09.mp4
+
+https://user-images.githubusercontent.com/82777171/147408818-37271aa8-de91-47a5-b8d0-f77fb34c5629.mp4
+
 
 
 
