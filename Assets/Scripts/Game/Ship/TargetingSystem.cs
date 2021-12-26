@@ -24,7 +24,7 @@ namespace Game.Shooting {
         
         public void FixedUpdate() {
             Ray ray = camera.ScreenPointToRay(movementInput.MouseInputRaw);
-            if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue)) {
+            if (Physics.Raycast(ray, out RaycastHit hit, 5000f)) {
                 ITargetable targetable = hit.collider.gameObject.GetComponent<ITargetable>();
                 if (targetable == null) return;
                 if (CurrentTarget != targetable) {

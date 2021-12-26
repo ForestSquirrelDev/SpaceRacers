@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allTargetables: {fileID: 11400000, guid: 599afc3d65ffece49807be145c7cb65d, type: 2}
+  cubesPool: {fileID: 11400000, guid: 871af8531e66a344c909719f0c7f7aa5, type: 2}
   config: {fileID: 11400000, guid: 89d5443eded441e48b46eb770addc74b, type: 2}
   fadeAnimatiovCurve:
     serializedVersion: 2

@@ -8,6 +8,7 @@ namespace Game.Environment {
     public class Cube : MonoBehaviour, ITargetable, IDestructible {
         bool ITargetable.CantBeTargeted { get; set; }
         [SerializeField] private TargetablesRuntimeSet allTargetables;
+        [SerializeField] private CubesPool cubesPool;
         [SerializeField] private CubeConfig config;
         [SerializeField] private AnimationCurve fadeAnimatiovCurve;
         
@@ -45,7 +46,7 @@ namespace Game.Environment {
             GetComponent<Collider>().enabled = false;
             Vector3 localScale = thisTransform.localScale;
             for (int i = 0; i < cubesCount; i++) {
-                CubeData cubeData = InstantiateChildCube(localScale);
+                CubeData cubeData = CreateChildCube(localScale);
                 cubeData.rb.mass *= cubeData.scaleModifier;
                 cubeData.rb.AddTorque(config.appliedTorque.x * cubeData.scaleModifier * Random.value, 
                     config.appliedTorque.y * cubeData.scaleModifier  * Random.value, 
@@ -63,15 +64,16 @@ namespace Game.Environment {
             gameObject.SetActive(false);
         }
         
-        private CubeData InstantiateChildCube(Vector3 parentLocalScale) {
-            GameObject cube = Instantiate(config.cubePrefab, RandomUtility.RandomPointInsideBox(
-                thisTransform.position, parentLocalScale), Quaternion.identity);
+        private CubeData CreateChildCube(Vector3 parentLocalScale) {
+            GameObject cube = cubesPool.GetObject();
+            cube.transform.position = RandomUtility.RandomPointInsideBox(
+                thisTransform.position, parentLocalScale);
             float scaleModifier = Random.Range(
                 config.childCubeScaleMultiplierRange.x, config.childCubeScaleMultiplierRange.y);
             cube.transform.localScale = parentLocalScale * scaleModifier;
             return new CubeData {
                 gameObject = cube,
-                cubeMonobehaviour = cube.GetComponent<Cube>(),
+                cubeMonobehaviour = cubesPool.GetCubeMonobehaviour(cube),
                 meshRenderer = cube.GetComponent<MeshRenderer>(),
                 rb = cube.GetComponent<Rigidbody>(),
                 scaleModifier = scaleModifier

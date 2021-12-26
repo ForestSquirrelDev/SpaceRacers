@@ -51,8 +51,7 @@ namespace Editor {
                         zGap = 0;
                         Vector3 newPos = new Vector3(x, y, z);
                         Vector3 localPos = transform.InverseTransformDirection(selfPos + newPos);
-                        Instantiate(prefab, localPos, Quaternion.identity);
-                        //points.Add(localPos);
+                        Instantiate(prefab, localPos, Quaternion.identity, transform);
                     }
                 }
             }
