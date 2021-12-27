@@ -27,7 +27,7 @@ MonoBehaviour:
   throttlePower: 5000
   strafeSpeed: 2000
   angularSpeed: 500
-  projectileSpeed: 200
+  projectileSpeed: 20
   pitchSensitivity: 3
   yawSensitivity: 4
   customRollSensitivity: 1

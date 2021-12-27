@@ -1,5 +1,6 @@
 using Game.Configs.Shooting;
 using UnityEngine;
+using Utils.Maths;
 
 namespace Game.Shooting {
     [RequireComponent(typeof(Rigidbody))]
@@ -28,21 +29,28 @@ namespace Game.Shooting {
             if (yieldTime > 0) return;
             distanceTraveled += Vector3.Distance(thisTransform.position, lastPosition);
             lastPosition = thisTransform.position;
+            if (target != null) {
+                transform.rotation = QuaternionExtensions.SmoothRotateTowardsTarget(
+                    transform, target, config.rotationSpeed, Time.fixedDeltaTime);
+            }
+            rigidbody.AddForce(thisTransform.forward * config.accelerationSpeed);
             if (distanceTraveled >= config.disablingDistance) {
                 ResetLaserBeam();
             }
         }
         
         private void OnTriggerEnter(Collider other) {
-            if (other.TryGetComponent(out IDestructible destructible)) {
+            if (other.GetComponent<LaserBeam>() != null) return;
+            if (other.TryGetComponent(out IDestructible destructible))
                 destructible.Destruct();
-            }
-            gameObject.SetActive(false);
+            ResetLaserBeam();
         }
         
         private void ResetLaserBeam() {
             distanceTraveled = 0;
             rigidbody.velocity = Vector3.zero;
+            yieldTime = config.onEnableYieldTime;
+            lastPosition = Vector3.zero;
             gameObject.SetActive(false);
         }
     }

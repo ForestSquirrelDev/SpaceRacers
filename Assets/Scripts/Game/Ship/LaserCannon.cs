@@ -7,7 +7,6 @@ using Game.Shooting;
 using UnityEngine;
 using Utils.Maths;
 using Utils.ScriptableObjects.Variables;
-using Object = UnityEngine.Object;
 
 namespace Game.Ship {
     public class LaserCannon : IDisposable {
@@ -47,11 +46,13 @@ namespace Game.Ship {
                 }
                 GameObject laser = lasersPool.GetObject();
                 laser.transform.position = gun.BaseValue.position;
-                LaserBeam laserMonobehaviour = lasersPool.GetLaserMonobehaviour(laser);
-                laserMonobehaviour.Init(currentTarget.BaseValue, laserBeamConfig);
+                LaserBeam laserBeam = lasersPool.GetLaserMonobehaviour(laser);
+                laserBeam.Init(currentTarget.BaseValue, laserBeamConfig);
                 Vector3 direction = gun.BaseValue.transform.forward;
-                laserMonobehaviour.Rigidbody.AddForce(direction * ( projectileSpeed + 
-                                                       shipSpeed.ModifiedValue().ClampPos1ToMaxValue()), ForceMode.Impulse);
+                Vector3 initialForce = direction * projectileSpeed;
+                laserBeam.Rigidbody.AddForce(initialForce + initialForce.normalized * 
+                    shipSpeed.ModifiedValue().ClampPos1ToMaxValue() 
+                    * (laserBeam.Rigidbody.drag * laserBeam.Rigidbody.mass), ForceMode.Impulse);
                 laser.transform.rotation = gun.BaseValue.rotation;
             }
         }

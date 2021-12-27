@@ -5,15 +5,15 @@ using Utils.Optimization;
 namespace Game.Shooting {
     [CreateAssetMenu(menuName = "Object Pools/Lasers Pool")]
     public class LaserBeamsPool : GameObjectsPool {
-        private Dictionary<GameObject, LaserBeam> laserMonobehavioursPool { get; } = new();
+        private Dictionary<GameObject, LaserBeam> laerMonobehavioursPool { get; } = new();
 
         public LaserBeam GetLaserMonobehaviour(GameObject key) {
-            return laserMonobehavioursPool.GetValueOrDefault(key);
+            return laerMonobehavioursPool.GetValueOrDefault(key);
         }
 
         protected override GameObject CreateNewObject() {
             GameObject laser = base.CreateNewObject();
-            laserMonobehavioursPool.TryAdd(laser, laser.GetComponent<LaserBeam>());
+            laerMonobehavioursPool.TryAdd(laser, laser.GetComponent<LaserBeam>());
             return laser;
         }
     }
