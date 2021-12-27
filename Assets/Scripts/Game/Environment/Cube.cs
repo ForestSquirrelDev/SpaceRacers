@@ -20,18 +20,6 @@ namespace Game.Environment {
             thisTransform = transform;
         }
 
-        private void Update() {
-            if (Input.GetKeyDown(KeyCode.H)) {
-                Destruct();
-            }
-            if (Input.GetKeyDown(KeyCode.A)) {
-                MaterialPropertyBlock props = new MaterialPropertyBlock();
-                props.SetFloat(Opacity, 0.1f);
-                GetComponent<MeshRenderer>().SetPropertyBlock(props);
-            }
-        }
-        
-
         public Transform GetTransform() {
             return thisTransform;
         }
