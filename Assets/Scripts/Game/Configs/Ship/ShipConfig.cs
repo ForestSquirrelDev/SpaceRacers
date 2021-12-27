@@ -29,8 +29,8 @@ namespace Game.Configs.Ship {
         public float strafeSpeed = 100f;
         public float angularSpeed = 100f;
 
-        [Header("Shooting parameters")]
-        public float projectileSpeed = 100f;
+        [FormerlySerializedAs("projectileSpeed")] [Header("Shooting parameters")]
+        public float projectileInitialSpeed = 100f;
 
         [Header("Input parameters")]
         public float pitchSensitivity = 2.5f;

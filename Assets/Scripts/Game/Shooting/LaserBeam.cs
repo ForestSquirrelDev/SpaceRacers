@@ -29,7 +29,7 @@ namespace Game.Shooting {
             if (yieldTime > 0) return;
             distanceTraveled += Vector3.Distance(thisTransform.position, lastPosition);
             lastPosition = thisTransform.position;
-            if (target != null) {
+            if (target != null && target.gameObject.activeSelf) {
                 transform.rotation = QuaternionExtensions.SmoothRotateTowardsTarget(
                     transform, target, config.rotationSpeed, Time.fixedDeltaTime);
             }

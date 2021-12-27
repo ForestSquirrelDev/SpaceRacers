@@ -29,7 +29,7 @@ namespace Game.Ship {
             this.shipSpeed = shipSpeed;
             this.lasersPool = lasersPool;
             this.laserBeamConfig = laserBeamConfig;
-            this.projectileSpeed = config.projectileSpeed;
+            this.projectileSpeed = config.projectileInitialSpeed;
 
             shootingInput.FireRequired += OnFireRequired;
         }
