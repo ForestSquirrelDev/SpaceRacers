@@ -6,7 +6,8 @@ using Utils;
 
 namespace Game.Environment {
     public class Cube : MonoBehaviour, ITargetable, IDestructible {
-        bool ITargetable.CantBeTargeted { get; set; }
+        public bool CantBeTargeted { get; set; }
+        
         [SerializeField] private TargetablesRuntimeSet allTargetables;
         [SerializeField] private CubesPool cubesPool;
         [SerializeField] private CubeConfig config;
@@ -30,6 +31,7 @@ namespace Game.Environment {
         }
 
         public void Destruct() {
+            CantBeTargeted = true;
             int cubesCount = Random.Range(config.onDestroyCubesCountRange.x, config.onDestroyCubesCountRange.y + 1);
             GetComponent<Collider>().enabled = false;
             Vector3 localScale = thisTransform.localScale;
@@ -45,7 +47,7 @@ namespace Game.Environment {
                     config.explosionForceRange.y * scaleModifier),
                     thisTransform.position, 
                     (localScale.x + localScale.y + localScale.z) / 3);
-                ((ITargetable)cubeData.cubeMonobehaviour).CantBeTargeted = true;
+                cubeData.cubeMonobehaviour.CantBeTargeted = true;
                 cubeData.cubeMonobehaviour.StartCoroutine(
                     FadeChildCubeOutRoutine(cubeData.meshRenderer, cubeData.gameObject));
             }

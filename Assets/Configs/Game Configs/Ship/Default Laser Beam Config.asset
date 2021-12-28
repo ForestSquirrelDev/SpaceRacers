@@ -15,4 +15,4 @@ MonoBehaviour:
   accelerationSpeed: 50
   rotationSpeed: 100
   disablingDistance: 10000
-  onEnableYieldTime: 0.5
+  onEnableYieldTime: 0.05
