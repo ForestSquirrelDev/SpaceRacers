@@ -16,7 +16,7 @@ namespace Game.Environment {
         private static readonly int Opacity = Shader.PropertyToID("_OPACITY");
         private Transform thisTransform;
         
-        void Awake() {
+        private void Awake() {
             allTargetables.AddItem(this);
             thisTransform = transform;
         }
