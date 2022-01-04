@@ -37,7 +37,7 @@ namespace Game.Shooting {
 
         private void LockTarget(Ray ray) {
             if (CurrentTarget == null) return;
-            float dot = CurrentTarget.DotProduct(transform.position, ray.direction);
+            float dot = CurrentTarget.ProjectVectorOnOffset(transform.position, ray.direction);
             if (dot < threshold) {
                 CurrentTarget = null;
                 targetableVariable.SetValue(null);

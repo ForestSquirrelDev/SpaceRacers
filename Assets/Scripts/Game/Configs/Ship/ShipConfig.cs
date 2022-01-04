@@ -7,16 +7,20 @@ using Utils.ScriptableObjects.Variables;
 namespace Game.Configs.Ship {
     [CreateAssetMenu(menuName = "Configs/Game/Ship/Ship Config")]
     public class ShipConfig : ScriptableObject {
-         [Header("Scriptable variables")] 
-        [FormerlySerializedAs("shipThrottle")] public FloatVariable shipInputThrottle;
+        [Header("Scriptable variables")] 
+        [FormerlySerializedAs("shipThrottle")] 
+        public FloatVariable shipInputThrottle;
         public FloatVariable shipSpeed;
         public FloatVariable shipTopSpeed;
         public FloatVariable shipThrottlePower;
         public FloatVariable shipNitroBank;
+        public FloatVariable distanceToCurrentTarget, distanceToCurrentWaypoint;
         public RigidbodyVariable shipRigidbody;
         public TransformVariable shipTransform;
-        public TargetableVariable targetableVariable;
         public TransformVariable gunOne, gunTwo;
+        public TransformVariable currentWaypointTransform;
+        [FormerlySerializedAs("targetableVariable")]
+        public TargetableVariable currentTargetVariable;
 
         [Header("Dependency configs")]
         public LaserBeamConfig laserBeamConfig;

@@ -14,6 +14,7 @@ namespace Game.Ship {
         private NitroBooster nitroBooster;
         private TargetingSystem targetingSystem;
         private LaserCannon laserCannon;
+        private ShipDistanceCalculator distanceCalculator;
         
         private void Awake() {
             Rigidbody rb = GetComponent<Rigidbody>();
@@ -25,10 +26,12 @@ namespace Game.Ship {
             movement = new ShipMovement(rb, config, movementInput, config.shipSpeed,
                 config.shipTopSpeed, config.shipThrottlePower);
             nitroBooster = new NitroBooster(config.shipThrottlePower, config, config.shipNitroBank, movementInput);
-            targetingSystem = new TargetingSystem(cam, t, movementInput, config.targetableVariable);
+            targetingSystem = new TargetingSystem(cam, t, movementInput, config.currentTargetVariable);
             laserCannon = new LaserCannon((config.gunOne, config.gunTwo),
-                shootingInput, config.laserBeamConfig, config.targetableVariable,
+                shootingInput, config.laserBeamConfig, config.currentTargetVariable,
                 config.shipSpeed, config, config.lasersPool);
+            distanceCalculator = new ShipDistanceCalculator(config.distanceToCurrentTarget, config.distanceToCurrentWaypoint,
+                config.shipTransform, config.currentWaypointTransform, config.currentTargetVariable);
             
             config.shipTransform.SetValue(t, true);
             config.shipRigidbody.SetValue(rb);
@@ -45,6 +48,7 @@ namespace Game.Ship {
             float dt = Time.deltaTime;
             movementInput.Update(dt);
             nitroBooster.Update(dt);
+            distanceCalculator.Update();
         }
 
         private void OnDestroy() {

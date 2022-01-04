@@ -25,8 +25,8 @@ namespace Game.Environment {
             return thisTransform;
         }
         
-        public float DotProduct(Vector3 position, Vector3 projected) {
-            Vector3 offset = thisTransform.position - position;
+        public float ProjectVectorOnOffset(Vector3 oppositePosition, Vector3 projected) {
+            Vector3 offset = thisTransform.position - oppositePosition;
             return Vector3.Dot(offset.normalized, projected.normalized);
         }
 

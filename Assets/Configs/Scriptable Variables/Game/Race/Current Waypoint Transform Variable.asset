@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 097ed2b26df4f4f47ae902fbe9a6c2ce, type: 3}
-  m_Name: Targetable Variable
+  m_Script: {fileID: 11500000, guid: 1059a8903d1b0ac438f5dc675648975a, type: 3}
+  m_Name: Current Waypoint Transform Variable
   m_EditorClassIdentifier: 
-  developerDescription: Used to store current target of ship targeting system. UI
-    uses that variable to position crosshair on screen.
+  developerDescription: 
