@@ -8,35 +8,41 @@ namespace Game.Shooting {
         public Rigidbody Rigidbody => rigidbody;
         
         private new Rigidbody rigidbody;
-        private Transform target;
+        private TrailRenderer[] trailRenderers;
+        private ITargetable target;
         private LaserBeamConfig config;
         private Transform thisTransform;
         private Vector3 lastPosition;
 
         private float distanceTraveled;
+        private float constantAcceleration;
         private float yieldTime;
-        
+
         public void Init(ITargetable target, LaserBeamConfig config) {
             yieldTime = config.onEnableYieldTime;
-            this.target = target?.GetTransform();
+            this.target = target;
             this.config = config;
-            this.rigidbody = GetComponent<Rigidbody>();
             thisTransform = transform;
+            constantAcceleration = config.constantAcceleration;
+            this.rigidbody ??= GetComponent<Rigidbody>();
+            this.trailRenderers ??= GetComponentsInChildren<TrailRenderer>();
         }
 
         private void FixedUpdate() {
-            yieldTime -= Time.fixedDeltaTime;
+            float dt = Time.fixedDeltaTime;
+            yieldTime -= dt;
             if (yieldTime > 0) return;
-            distanceTraveled += Vector3.Distance(thisTransform.position, lastPosition);
-            lastPosition = thisTransform.position;
-            if (target != null && target.gameObject.activeSelf) {
-                transform.rotation = QuaternionExtensions.SmoothRotateTowardsTarget(
-                    transform, target, config.rotationSpeed, Time.fixedDeltaTime);
-            }
-            rigidbody.AddForce(thisTransform.forward * config.accelerationSpeed);
-            if (distanceTraveled >= config.disablingDistance) {
-                ResetLaserBeam();
-            }
+            CountTraveledDistance();
+            Accelerate(dt);
+            if (target == null) return;
+            Transform targetTransform = target.GetTransform();
+            bool cantFollowTarget = targetTransform == null 
+                                    || !targetTransform.gameObject.activeSelf 
+                                    || PassedTarget();
+            Debug.Log(cantFollowTarget);
+            if (cantFollowTarget) return;
+            transform.rotation = QuaternionExtensions.SmoothRotateTowardsTarget(
+                transform, targetTransform, config.rotationSpeed, dt);
         }
         
         private void OnTriggerEnter(Collider other) {
@@ -46,12 +52,33 @@ namespace Game.Shooting {
             ResetLaserBeam();
         }
         
+        private void CountTraveledDistance() {
+            distanceTraveled += Vector3.Distance(thisTransform.position, lastPosition);
+            lastPosition = thisTransform.position;
+            if (distanceTraveled >= config.disablingDistance) 
+                ResetLaserBeam();
+        }
+
+        private void Accelerate(float dt) {
+            rigidbody.AddForce(thisTransform.forward * constantAcceleration);
+            constantAcceleration += config.accelerationRaiseOverTime * dt;
+        }
+        
         private void ResetLaserBeam() {
             distanceTraveled = 0;
             rigidbody.velocity = Vector3.zero;
             yieldTime = config.onEnableYieldTime;
             lastPosition = Vector3.zero;
+            foreach (var trailRenderer in trailRenderers) {
+                trailRenderer.Clear();
+            }
             gameObject.SetActive(false);
+        }
+
+        private bool PassedTarget() {
+            float dot = target.ProjectVectorOnOffset(transform.position, transform.forward);
+            Debug.Log(dot);
+            return dot < -0.5f;
         }
     }
 }

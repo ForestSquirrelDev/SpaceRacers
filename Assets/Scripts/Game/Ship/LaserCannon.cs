@@ -21,7 +21,8 @@ namespace Game.Ship {
          
         public LaserCannon((TransformVariable, TransformVariable) guns, 
             ShipShootingInputProcessor shootingInput, LaserBeamConfig laserBeamConfig,
-            TargetableVariable currentTarget, FloatVariable shipSpeed, ShipConfig config, LaserBeamsPool lasersPool) {
+            TargetableVariable currentTarget, FloatVariable shipSpeed, ShipConfig config, LaserBeamsPool lasersPool,
+            float initialProjectileSpeed) {
             this.shootingInput = shootingInput;
             this.guns.Add(guns.Item1);
             this.guns.Add(guns.Item2);
@@ -29,7 +30,7 @@ namespace Game.Ship {
             this.shipSpeed = shipSpeed;
             this.lasersPool = lasersPool;
             this.laserBeamConfig = laserBeamConfig;
-            this.projectileSpeed = config.projectileInitialSpeed;
+            this.projectileSpeed = initialProjectileSpeed;
 
             shootingInput.FireRequired += OnFireRequired;
         }

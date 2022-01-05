@@ -29,7 +29,7 @@ namespace Game.Ship {
             targetingSystem = new TargetingSystem(cam, t, movementInput, config.currentTargetVariable);
             laserCannon = new LaserCannon((config.gunOne, config.gunTwo),
                 shootingInput, config.laserBeamConfig, config.currentTargetVariable,
-                config.shipSpeed, config, config.lasersPool);
+                config.shipSpeed, config, config.lasersPool, config.laserBeamConfig.projectileInitialSpeed);
             distanceCalculator = new ShipDistanceCalculator(config.distanceToCurrentTarget, config.distanceToCurrentWaypoint,
                 config.shipTransform, config.currentWaypointTransform, config.currentTargetVariable);
             

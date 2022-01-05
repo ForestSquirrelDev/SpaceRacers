@@ -1,3 +1,4 @@
+using Game.ScriptableVariables;
 using Game.Shooting;
 using UnityEngine;
 using Utils.ScriptableObjects.Variables;
@@ -5,12 +6,13 @@ using Utils.ScriptableObjects.Variables;
 
 namespace Game.Ship {
     public class ShipDistanceCalculator {
-        private FloatVariable currentTargetDistance, currentWaypointDistance;
+        private FloatVariable currentWaypointDistance;
+        private DistanceToTargetVariable currentTargetDistance;
         private TargetableVariable currentTarget;
         private TransformVariable shipTransform;
         private TransformVariable currentWaypointTransform;
         
-        public ShipDistanceCalculator(FloatVariable currentTargetDistance, FloatVariable currentWaypointDistance,
+        public ShipDistanceCalculator(DistanceToTargetVariable currentTargetDistance, FloatVariable currentWaypointDistance,
             TransformVariable shipTransform, TransformVariable currentWaypointTransform, TargetableVariable currentTarget) {
             this.currentTargetDistance = currentTargetDistance;
             this.currentWaypointDistance = currentWaypointDistance;
@@ -25,14 +27,18 @@ namespace Game.Ship {
             SetCurrentWaypointDistance();
         }
 
-        private void SetCurrentWaypointDistance() {
-            if (currentTarget.BaseValue == null 
-                || !currentTarget.BaseValue.GetTransform().gameObject.activeSelf) return;
+        private void SetCurrentTargetDistance() {
+            if (currentTarget.BaseValue == null
+                || !currentTarget.BaseValue.GetTransform().gameObject.activeSelf) {
+                currentTargetDistance.UpdatingDistance = false;
+                return;
+            }
+            currentTargetDistance.UpdatingDistance = true;
             currentTargetDistance.SetValue(Vector3.Distance(
                 shipTransform.BaseValue.position, currentTarget.BaseValue.GetTransform().position));
         }
 
-        private void SetCurrentTargetDistance() {
+        private void SetCurrentWaypointDistance() {
             if (currentWaypointTransform.BaseValue == null) return;
             currentWaypointDistance.SetValue(Vector3.Distance(
                 shipTransform.BaseValue.position, currentWaypointTransform.BaseValue.position));

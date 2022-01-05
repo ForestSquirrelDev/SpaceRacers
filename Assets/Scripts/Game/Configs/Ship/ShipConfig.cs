@@ -1,4 +1,5 @@
 using Game.Configs.Shooting;
+using Game.ScriptableVariables;
 using Game.Shooting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -14,7 +15,8 @@ namespace Game.Configs.Ship {
         public FloatVariable shipTopSpeed;
         public FloatVariable shipThrottlePower;
         public FloatVariable shipNitroBank;
-        public FloatVariable distanceToCurrentTarget, distanceToCurrentWaypoint;
+        public FloatVariable distanceToCurrentWaypoint;
+        public DistanceToTargetVariable distanceToCurrentTarget;
         public RigidbodyVariable shipRigidbody;
         public TransformVariable shipTransform;
         public TransformVariable gunOne, gunTwo;
@@ -32,9 +34,6 @@ namespace Game.Configs.Ship {
         public float throttlePower = 5000f;
         public float strafeSpeed = 100f;
         public float angularSpeed = 100f;
-
-        [FormerlySerializedAs("projectileSpeed")] [Header("Shooting parameters")]
-        public float projectileInitialSpeed = 100f;
 
         [Header("Input parameters")]
         public float pitchSensitivity = 2.5f;
