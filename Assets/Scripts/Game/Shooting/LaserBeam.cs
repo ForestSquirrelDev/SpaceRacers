@@ -39,7 +39,6 @@ namespace Game.Shooting {
             bool cantFollowTarget = targetTransform == null 
                                     || !targetTransform.gameObject.activeSelf 
                                     || PassedTarget();
-            Debug.Log(cantFollowTarget);
             if (cantFollowTarget) return;
             transform.rotation = QuaternionExtensions.SmoothRotateTowardsTarget(
                 transform, targetTransform, config.rotationSpeed, dt);
@@ -77,7 +76,6 @@ namespace Game.Shooting {
 
         private bool PassedTarget() {
             float dot = target.ProjectVectorOnOffset(transform.position, transform.forward);
-            Debug.Log(dot);
             return dot < -0.5f;
         }
     }

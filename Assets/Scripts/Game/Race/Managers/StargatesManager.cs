@@ -7,10 +7,11 @@ namespace Game.Race {
         [SerializeField] private StargatesRuntimeSet stargatesSet;
         [SerializeField] private TransformVariable currentStargate;
 
+        private StargateController[] sceneStargates;
         private int currentStargateIndex = 0;
         
         private void Awake() {
-            StargateController[] sceneStargates = GetComponentsInChildren<StargateController>();
+            sceneStargates = GetComponentsInChildren<StargateController>();
             foreach (var stargate in sceneStargates) 
                 stargatesSet.AddItem(stargate);
             currentStargate.SetValue(sceneStargates[currentStargateIndex].transform);
@@ -25,7 +26,7 @@ namespace Game.Race {
         private void OnStargatesCollectionChanged(RuntimeSetChangeType changeType) {
             if (changeType != RuntimeSetChangeType.Removal) return;
             currentStargateIndex++;
-            currentStargate.SetValue(stargatesSet.Items[currentStargateIndex].transform);
+            currentStargate.SetValue(sceneStargates[currentStargateIndex].transform);
         }
     }
 }

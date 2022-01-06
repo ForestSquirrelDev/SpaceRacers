@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TrailShader_Mat
+  m_Name: TrailShader Material
   m_Shader: {fileID: -6465566751694194690, guid: e844819164022d04b8b6e419ed75552c, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -43,8 +43,8 @@ Material:
     m_Colors:
     - Color_760f6f18c65b45aca49d760b02cd16b7: {r: 0, g: 15.731364, b: 333.8545, a: 0}
     - Color_806966a84d3a45ddb8a149e7d47bc5a3: {r: 0, g: 332.10657, b: 333.8545, a: 0}
-    - Vector2_15493e1a4d934682b0be29c9ae537084: {r: -0.1, g: 0, b: 0, a: 0}
-    - Vector2_a503009dd4bb4773b3a44fd64bbd5690: {r: -0.3, g: 0, b: 0, a: 0}
+    - Vector2_15493e1a4d934682b0be29c9ae537084: {r: -1, g: 0, b: 0, a: 0}
+    - Vector2_a503009dd4bb4773b3a44fd64bbd5690: {r: -2, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &275910285410292109
 MonoBehaviour:
