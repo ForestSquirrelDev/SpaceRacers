@@ -24,8 +24,8 @@ namespace Game.Shooting {
             this.config = config;
             thisTransform = transform;
             constantAcceleration = config.constantAcceleration;
-            this.rigidbody ??= GetComponent<Rigidbody>();
-            this.trailRenderers ??= GetComponentsInChildren<TrailRenderer>();
+            rigidbody ??= GetComponent<Rigidbody>();
+            trailRenderers ??= GetComponentsInChildren<TrailRenderer>();
         }
 
         private void FixedUpdate() {

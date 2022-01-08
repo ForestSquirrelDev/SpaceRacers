@@ -15,6 +15,6 @@ MonoBehaviour:
   projectileInitialSpeed: 50
   constantAcceleration: 100
   accelerationRaiseOverTime: 100
-  rotationSpeed: 100
+  rotationSpeed: 50
   disablingDistance: 10000
   onEnableYieldTime: 0.05
