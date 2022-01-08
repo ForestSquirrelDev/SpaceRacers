@@ -18,5 +18,8 @@ Controls: mouse for pitch/yaw and roll based on it, W/S to increase throttle, A/
 
 
 
-https://user-images.githubusercontent.com/82777171/148663396-ee36efa9-3283-4638-8a50-7d48296facff.mp4
+
+https://user-images.githubusercontent.com/82777171/148663527-e0f4e78e-03e2-404d-b4db-f4bf22fedbee.mp4
+
+
 
