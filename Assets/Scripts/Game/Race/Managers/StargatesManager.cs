@@ -15,7 +15,6 @@ namespace Game.Race {
             foreach (var stargate in sceneStargates) 
                 stargatesSet.AddItem(stargate);
             currentStargate.SetValue(sceneStargates[currentStargateIndex].transform);
-
             stargatesSet.CollectionChanged += OnStargatesCollectionChanged;
         }
 
@@ -25,8 +24,8 @@ namespace Game.Race {
 
         private void OnStargatesCollectionChanged(RuntimeSetChangeType changeType) {
             if (changeType != RuntimeSetChangeType.Removal) return;
-            currentStargateIndex++;
             currentStargate.SetValue(sceneStargates[currentStargateIndex].transform);
+            currentStargateIndex++;
         }
     }
 }
