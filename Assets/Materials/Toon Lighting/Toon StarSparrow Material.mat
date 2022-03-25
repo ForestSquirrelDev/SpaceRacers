@@ -63,6 +63,7 @@ Material:
     m_Ints: []
     m_Floats:
     - MAIN_LIGHT_CALCULATE_SHADOWS: 1
+    - _FresnelPower: 5
     - _MAIN_LIGHT_CALCULATE_SHADOWS: 1
     - _MAIN_LIGHT_SHADOWS_CASCADE: 1
     - _QueueControl: 0
@@ -71,4 +72,5 @@ Material:
     - _Smoothness: 0.85
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _FresnelColor: {r: 0.0032367706, g: 0, b: 1, a: 0}
   m_BuildTextureStacks: []
